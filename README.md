@@ -1,24 +1,30 @@
-# README
+### SundayStall
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##### The Marketplace Problem
 
-Things you may want to cover:
+I believe that the long tail market for local value-added goods is underserved - e.g. hobbyist bakers, artisans, creators.
 
-* Ruby version
+##### Why the problem needs to be solved?
 
-* System dependencies
+- Fragmented market with uncoordinated micro to medium-sized merchants.
+- Discovery is difficult on mature platforms whose algorithms favour established business entities.
 
-* Configuration
+##### Application/Features
 
-* Database creation
+Two-sided Marketplace Web Application
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- All Users
+  - Listings Platform
+  - Transaction Handling
+  - Responsive Design
+  - User Session Management
+  - Payment Processing
+  - Google Maps Autocomplete and Map View
+- Sellers
+  - Inventory Management
+  - Content Management System
+  - Customer Relationship Management
+  - Seller Dashboard
+- Buyers
+  - Shopping Cart
+  - Merchant Discovery (Search/Filter)
