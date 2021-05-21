@@ -26,4 +26,5 @@
 class Product < ApplicationRecord
   belongs_to :stall
   belongs_to :product_category
+  has_many_attached :images # blobs automatically purged if product deleted
 end

@@ -6,5 +6,5 @@
 #  term :string(50)
 #
 class Keyword < ApplicationRecord
-  has_and_belongs_to_many :stalls
+  has_and_belongs_to_many :stalls, touch: true
 end

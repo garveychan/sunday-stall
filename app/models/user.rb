@@ -12,6 +12,6 @@
 #  updated_at    :datetime         not null
 #
 class User < ApplicationRecord
-  has_one :address
-  has_one :stall
+  has_one :address, dependent: :destroy
+  has_one :stall, dependent: :destroy
 end
