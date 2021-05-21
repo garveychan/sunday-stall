@@ -34,12 +34,13 @@ gem 'devise'
 gem 'pundit'
 gem 'rolify'
 
-## Scanners
+## Assistive
 group :development do
 	gem 'rubocop', require: false
 	gem 'rubocop-rails', require: false
 	gem 'bullet'
 	gem 'brakeman'
+	gem 'annotate'
 end
 
 ## Database Seeding
