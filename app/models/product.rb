@@ -25,5 +25,5 @@
 #
 class Product < ApplicationRecord
   belongs_to :stall
-  has_one :product_category
+  belongs_to :product_category
 end

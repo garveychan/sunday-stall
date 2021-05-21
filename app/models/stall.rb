@@ -22,7 +22,7 @@
 class Stall < ApplicationRecord
   belongs_to :user
   has_many :products, dependent: :destroy
-  has_many :search_terms
+  has_and_belongs_to_many :keywords
 
   has_many_attached :images
 end

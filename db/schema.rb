@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 2021_05_21_095045) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "keywords", force: :cascade do |t|
+    t.string "term", limit: 50
+  end
+
   create_table "product_categories", force: :cascade do |t|
     t.string "name", limit: 50
   end
@@ -73,9 +77,10 @@ ActiveRecord::Schema.define(version: 2021_05_21_095045) do
     t.index ["stall_id"], name: "index_products_on_stall_id"
   end
 
-  create_table "search_terms", force: :cascade do |t|
-    t.string "term", limit: 50
+  create_table "search_terms", id: false, force: :cascade do |t|
     t.bigint "stall_id", null: false
+    t.bigint "keywords_id", null: false
+    t.index ["keywords_id"], name: "index_search_terms_on_keywords_id"
     t.index ["stall_id"], name: "index_search_terms_on_stall_id"
   end
 
@@ -105,6 +110,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_095045) do
   add_foreign_key "addresses", "users"
   add_foreign_key "products", "product_categories"
   add_foreign_key "products", "stalls"
+  add_foreign_key "search_terms", "keywords", column: "keywords_id"
   add_foreign_key "search_terms", "stalls"
   add_foreign_key "stalls", "users"
 end

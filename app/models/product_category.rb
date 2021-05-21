@@ -6,4 +6,5 @@
 #  name :string(50)
 #
 class ProductCategory < ApplicationRecord
+  has_many :products
 end
