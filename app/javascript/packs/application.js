@@ -13,5 +13,11 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import "stylesheets/application"
+import "@fortawesome/fontawesome-pro/js/all"
 
-global.toastr = require("toastr")
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("../controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))

@@ -35,9 +35,9 @@
 
     <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-500 hover:bg-indigo-600">
       <% if current_user.nil? %>
-        <%= link_to new_user_session_path do %>Log In<% end %>
+        <%= link_to new_user_session_path do %>Sign In<% end %>
       <% else %>
-        <%= link_to destroy_user_session_path, method: :delete do %>Log Out<% end %>
+        <%= link_to destroy_user_session_path, method: :delete do %>Sign Out<% end %>
       <% end %>
     </button>
   </div>

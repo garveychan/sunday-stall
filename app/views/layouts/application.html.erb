@@ -9,21 +9,18 @@
     <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
-
   <body class="flex flex-col h-screen justify-between">
-    <%= render "components/navbar" %> 
-    
+    <%= render "components/navbar" %>
     <% unless flash.empty? %>
-      <script type="text/javascript">
-        <% flash.each do |f| %>
-            <% type = f[0].to_s.gsub("alert", "error").gsub("notice", "info") %>
-            toastr['<%= type %>']('<%= f[1] %>');
-        <% end %>
-      </script>
+      <div class="fixed inset-0 top-16 px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end">
+        <div class="flex flex-col items-end justify-center">
+          <% flash.each do |type, data| %>
+            <%= render NotificationComponent.new(type: type, data: data) %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-    
     <%= yield %>
-
-    <%= render "components/footer" %> 
+    <%= render "components/footer" %>
   </body>
 </html>

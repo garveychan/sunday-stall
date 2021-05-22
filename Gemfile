@@ -27,6 +27,10 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Custom Gems
+
+## Styling
+gem "view_component", require: "view_component/engine"
+
 ## Authentication/Authorisation
 gem 'devise'
 gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'

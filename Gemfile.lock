@@ -96,7 +96,7 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
     aws-eventstream (1.1.1)
-    aws-partitions (1.460.0)
+    aws-partitions (1.461.0)
     aws-sdk-core (3.114.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -105,7 +105,7 @@ GEM
     aws-sdk-kms (1.43.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.94.1)
+    aws-sdk-s3 (1.95.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -140,7 +140,7 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.10.0)
-    ffi (1.15.0)
+    ffi (1.15.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haml (5.2.1)
@@ -198,7 +198,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.2.3)
     public_suffix (4.0.6)
-    puma (5.3.1)
+    puma (5.3.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -297,6 +297,8 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
     uniform_notifier (1.14.2)
+    view_component (2.32.0)
+      activesupport (>= 5.0.0, < 7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -349,6 +351,7 @@ DEPENDENCIES
   spring
   turbolinks (~> 5)
   tzinfo-data
+  view_component
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)

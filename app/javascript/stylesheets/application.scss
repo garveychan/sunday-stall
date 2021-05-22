@@ -1,7 +1,14 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Custom CSS */
+@keyframes notification-countdown {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
 
-@import "tailwindcss/utilities";
-@import 'toastr'
