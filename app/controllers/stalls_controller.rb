@@ -1,0 +1,2 @@
+class StallsController < ApplicationController
+end
