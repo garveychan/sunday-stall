@@ -8,23 +8,10 @@
           </div>
         </div>
         <div class="ml-3 w-0 flex-1 pt-0.5">
-          <p class="text-sm leading-5 font-medium text-gray-900">
-            <%= @data[:title] %>
-          </p>
-          <% if @data[:body].present? %>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              <%= @data[:body] %>
+          <% @data[:title].each do |title| %>
+            <p class="text-sm leading-5 font-medium text-gray-900">
+              <%= title %>.
             </p>
-          <% end %>
-          <% if @data[:action].present? %>
-            <div class="mt-2">
-              <button class="text-sm leading-5 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                <%= @data.dig(:action, :name) %>
-              </button>
-              <button class="ml-6 text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                <%= t('.dismiss') %>
-              </button>
-            </div>
           <% end %>
         </div>
         <div class="ml-4 flex-shrink-0 flex">
