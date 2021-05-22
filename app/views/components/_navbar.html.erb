@@ -1,0 +1,10 @@
+<div class="my-10">
+  <% if current_user.nil? %>
+    <%= button_to new_user_session_path, class: 'btn btn-blue' do %>Sign in<% end %>
+  <% else %>
+    <%= button_to destroy_user_session_path, method: :delete do %>Log out<% end %>
+  <% end %>
+  <% if can? :manage, User %>
+    <%= button_to rails_admin_path, method: :get, class: 'btn btn-blue' do %>Admin Dashboard<% end %>
+<% end %>
+</div>

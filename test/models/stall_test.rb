@@ -3,7 +3,7 @@
 # Table name: stalls
 #
 #  id          :bigint           not null, primary key
-#  active      :boolean
+#  active      :boolean          not null
 #  description :text
 #  subtitle    :string(100)
 #  title       :string(50)

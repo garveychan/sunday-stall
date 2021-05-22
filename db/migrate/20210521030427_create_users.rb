@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :first_name, limit: 50
       t.string :last_name, limit: 50
       t.date :date_of_birth
-      t.string :email_address, limit: 100, null: false
       t.string :phone_number, limit: 12
 
       t.timestamps

@@ -29,7 +29,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Custom Gems
 ## Authentication/Authorisation
 gem 'devise'
-gem 'rails_admin', '~> 2.0'
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'cancancan'
 
 ## Assistive
@@ -39,6 +39,7 @@ group :development do
 	gem 'bullet'
 	gem 'brakeman'
 	gem 'annotate'
+	gem 'letter_opener'
 end
 
 ## Database Seeding

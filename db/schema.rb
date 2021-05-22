@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_22_000941) do
+ActiveRecord::Schema.define(version: 2021_05_22_034912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(version: 2021_05_22_000941) do
   end
 
   create_table "keywords", force: :cascade do |t|
-    t.string "term", limit: 50
+    t.string "term", limit: 50, null: false
   end
 
   create_table "product_categories", force: :cascade do |t|
-    t.string "name", limit: 50
+    t.string "name", limit: 50, null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 2021_05_22_000941) do
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
-    t.integer "rating"
-    t.text "desription"
+    t.integer "rating", null: false
+    t.text "desription", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
@@ -109,22 +109,15 @@ ActiveRecord::Schema.define(version: 2021_05_22_000941) do
     t.string "title", limit: 50
     t.string "subtitle", limit: 100
     t.text "description"
-    t.boolean "active"
+    t.boolean "active", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_stalls_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name", limit: 50
-    t.string "last_name", limit: 50
-    t.date "date_of_birth"
-    t.string "email_address", limit: 100, null: false
-    t.string "phone_number", limit: 12
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'user_role' for column 'role'
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
