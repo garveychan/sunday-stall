@@ -27,11 +27,9 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Custom Gems
-## Authentication
+## Authentication/Authorisation
 gem 'devise'
-
-## Authorisation
-gem 'pundit'
+gem 'cancancan'
 gem 'rolify'
 
 ## Assistive

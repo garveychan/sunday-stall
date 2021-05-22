@@ -1,7 +1,7 @@
 class CreateSearchTerms < ActiveRecord::Migration[6.1]
   def change
     create_table :keywords do |t|
-      t.string :term, limit: 50
+      t.string :term, limit: 50, null: false
     end
 
     create_table :search_terms, id: false do |t|
