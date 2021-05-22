@@ -10,7 +10,8 @@
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
   <body>
-    <%= render "components/navbar" %> <% unless flash.empty? %>
+    <%= render "components/navbar" %> 
+    <% unless flash.empty? %>
       <script type="text/javascript">
         <% flash.each do |f| %>
             <% type = f[0].to_s.gsub("alert", "error").gsub("notice", "info") %>
