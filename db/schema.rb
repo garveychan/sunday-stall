@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_095045) do
+ActiveRecord::Schema.define(version: 2021_05_21_235826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2021_05_21_095045) do
     t.integer "post_code"
     t.string "country_name", limit: 50
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "favouriteable_type", null: false
+    t.bigint "favouriteable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["favouriteable_type", "favouriteable_id"], name: "index_favourites_on_favouriteable"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -108,6 +118,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_095045) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "favourites", "users"
   add_foreign_key "products", "product_categories"
   add_foreign_key "products", "stalls"
   add_foreign_key "search_terms", "keywords", column: "keywords_id"

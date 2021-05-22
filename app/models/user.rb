@@ -14,4 +14,9 @@
 class User < ApplicationRecord
   has_one :address, dependent: :destroy
   has_one :stall, dependent: :destroy
+
+  validates :email_address,
+    uniqueness: {
+      message: ->(_, data) { "It looks like #{data[:value]} is already in use. Perhaps you'd like to login?" }
+    }
 end

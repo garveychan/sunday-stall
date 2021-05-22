@@ -24,4 +24,5 @@ class Stall < ApplicationRecord
   has_many :products, dependent: :destroy
   has_and_belongs_to_many :keywords, dependent: :destroy
   has_many_attached :images # blobs automatically purged if stall is deleted
+  has_many :favourites, as: :favouriteable
 end
