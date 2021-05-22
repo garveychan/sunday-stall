@@ -25,16 +25,16 @@
       <a class="mr-5 hover:text-gray-900" href=<%= root_path %>>Messages</a>
       <a class="mr-5 hover:text-gray-900" href=<%= root_path %>>Stall</a>
       <a class="mr-5 hover:text-gray-900" href=<%= root_path %>>Profile</a>
+      <% if can? :manage, User %>
+        <%= link_to rails_admin_path, method: :get, class: "mr-5 hover:text-gray-900" do %>Admin Dashboard<% end %>
+      <% end %>
     </nav>
 
     <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-500 hover:bg-indigo-600">
       <% if current_user.nil? %>
         <%= link_to new_user_session_path do %>Log In<% end %>
       <% else %>
-        <%= button_to destroy_user_session_path, method: :delete do %>Log Out<% end %>
-      <% end %>
-      <% if can? :manage, User %>
-        <%= button_to rails_admin_path, method: :get do %>Admin Dashboard<% end %>
+        <%= link_to destroy_user_session_path, method: :delete do %>Log Out<% end %>
       <% end %>
     </button>
   </div>
