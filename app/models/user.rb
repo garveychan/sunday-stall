@@ -14,6 +14,9 @@
 class User < ApplicationRecord
   has_one :address, dependent: :destroy
   has_one :stall, dependent: :destroy
+  
+  has_many :reviews
+  has_many :products, through: :reviews
 
   validates :email_address,
     uniqueness: {
