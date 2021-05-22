@@ -6,8 +6,8 @@
 #  active              :boolean          not null
 #  description         :text             not null
 #  name                :string(5)        not null
-#  price               :integer          not null
 #  stock_level         :integer          not null
+#  unit_price          :integer          not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  product_category_id :bigint           not null

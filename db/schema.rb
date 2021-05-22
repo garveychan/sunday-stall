@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_05_22_034912) do
   create_table "products", force: :cascade do |t|
     t.string "name", limit: 5, null: false
     t.text "description", null: false
-    t.integer "price", null: false
+    t.integer "unit_price", null: false
     t.integer "stock_level", null: false
     t.boolean "active", null: false
     t.bigint "stall_id", null: false
