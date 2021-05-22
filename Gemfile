@@ -29,8 +29,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Custom Gems
 ## Authentication/Authorisation
 gem 'devise'
+gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
-gem 'rolify'
 
 ## Assistive
 group :development do
