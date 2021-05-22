@@ -1,8 +1,8 @@
-<header class="text-gray-600 body-font bg-white shadow-md">
+<header class="text-gray-600 body-font bg-white shadow-md sticky top-0 z-50">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href=<%= root_path %>>
       <%= render "components/stand" %>
-      <span class="ml-3 text-xl">SundayStall</span>
+      <span class="ml-3 text-xl text-indigo-600">SundayStall</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-gray-900" href=<%= root_path %>>Favourites</a>
@@ -13,7 +13,7 @@
     </nav>
     <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-500 hover:bg-indigo-600">
       <% if current_user.nil? %>
-        <%= link_to new_user_session_path do %>Sign In<% end %>
+        <%= link_to new_user_session_path do %>Log In<% end %>
       <% else %>
         <%= button_to destroy_user_session_path, method: :delete do %>Log Out<% end %>
       <% end %>
