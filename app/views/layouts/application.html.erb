@@ -9,8 +9,9 @@
     <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
   </head>
-  <body>
+  <body class="flex flex-col h-screen justify-between">
     <%= render "components/navbar" %> 
+    
     <% unless flash.empty? %>
       <script type="text/javascript">
         <% flash.each do |f| %>
@@ -19,6 +20,9 @@
         <% end %>
       </script>
     <% end %>
+    
     <%= yield %>
+
+    <%= render "components/footer" %> 
   </body>
 </html>
