@@ -44,10 +44,10 @@ Buyer
 - Search Results | stalls/search, stalls#search
 
 Seller
-- Create Stall | stalls/create, stalls#create
-- Create Product | stalls/id/products/create, products#create
+- Create Stall | stalls/new, stalls#create
+- Create Product | stalls/id/products/new, products#create
 - Edit Stall | stalls/id/edit, stalls#edit
-- Edit Product | stalls/id/products/edit, products#edit
+- Edit Product | stalls/id/products/id/edit, products#edit
 
 User
 - Authentication
