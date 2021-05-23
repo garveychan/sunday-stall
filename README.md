@@ -52,7 +52,6 @@ User
 - Authentication (Sign Up/Sign In/Sign Out/etc.)
 - Favourites
 - Purchases
-- Messages
 - Profile (Edit User)
 
 Admin
