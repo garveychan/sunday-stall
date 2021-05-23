@@ -35,28 +35,35 @@ I believe that the long tail market for local value-added goods is underserved -
 ##### Sitemap
 
 Home
-- Featured Stalls and Products
+- Featured Stalls and Products | root, home#index
 
 Buyer
-- View Stall with all Products
-- View Product
+- View all Stalls | stalls, stalls#index
+- View Stall with all Products | stalls/id, stalls#show
+- View Product | stalls/id/products/id, products#show
 
 Seller
-- Create Stall
-- Create Product
-- Edit Stall
-- Edit Product
-- Merchant Insights
+- Create Stall | stalls/create, stalls#create
+- Create Product | stalls/id/products/create, products#create
+- Edit Stall | stalls/id/edit, stalls#edit
+- Edit Product | stalls/id/products/edit, products#edit
 
 User
-- Authentication (Sign Up/Sign In/Sign Out/etc.)
-- Favourites
-- Purchases
-- Profile (Edit User)
+- Authentication
+  - Log In | users/sign_in, devise/sessions#new
+  - Sign Up | users/sign_up, devise/registrations#new
+  - Forgot Password? | users/password/new, devise/passwords#new
+- Favourites | favourites, favourites#index
+- Purchases | purchases, purchases#index
+- Profile (Edit User) | users/id, users#show
+  - Edit Details | users/id/profile, users#edit
+  - Edit Registration | users/edit, devise/registrations#edit
 
 Admin
-- All User Pages
-- Dashboard
+- Dashboard | /admin, RailsAdmin::Engine
+
+<!-- - Merchant Insights -->
+<!-- - Messaging -->
 
 ##### Screenshots
 
