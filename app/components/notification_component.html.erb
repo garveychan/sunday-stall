@@ -1,4 +1,4 @@
-<div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto hidden" data-controller="notification" data-notification-timeout="<%= @data[:timeout] %>">
+<div class="max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto z-50 hidden" data-controller="notification" data-notification-timeout="<%= @data[:timeout] %>">
   <div class="rounded-lg shadow-xs overflow-hidden">
     <div class="p-4">
       <div class="flex items-start">
@@ -8,9 +8,15 @@
           </div>
         </div>
         <div class="ml-3 w-0 flex-1 pt-0.5">
-          <% @data[:title].each do |title| %>
+          <% if @data[:title].class == Array %>
+            <% @data[:title].each do |title| %>
+              <p class="text-sm leading-5 font-medium text-gray-900">
+                <%= title %>
+              </p>
+            <% end %>
+          <% else %>
             <p class="text-sm leading-5 font-medium text-gray-900">
-              <%= title %>.
+              <%= @data[:title] %>
             </p>
           <% end %>
         </div>

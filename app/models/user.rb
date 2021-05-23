@@ -38,9 +38,16 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :products, through: :reviews
 
-  # Send Welcome Email
-  after_create :welcome_email
+  after_create :set_default_role, :welcome_email
+
+  private
+
   def welcome_email
     UserMailer.send_welcome_email(self).deliver_later
+  end
+  
+  def set_default_role
+    self.role ||= User.roles[:user]
+    self.save
   end
 end
