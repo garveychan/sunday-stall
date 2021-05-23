@@ -41,6 +41,7 @@ Buyer
 - View all Stalls | stalls, stalls#index
 - View Stall with all Products | stalls/id, stalls#show
 - View Product | stalls/id/products/id, products#show
+- Search Results | stalls/search, stalls#search
 
 Seller
 - Create Stall | stalls/create, stalls#create
