@@ -20,9 +20,17 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Stall < ApplicationRecord
+  # Associations
   belongs_to :user
   has_many :products, dependent: :destroy
   has_and_belongs_to_many :keywords, dependent: :destroy
-  has_many_attached :images # blobs automatically purged if stall is deleted
+  has_one_attached :image # blobs automatically purged if stall is deleted
   has_many :favourites, as: :favouriteable
+
+  # Validations
+  validates :active, presence: true
+  validates :user_id, presence: true
+  validates :title, length: { maximum: 50 }
+  validates :subtitle, length: { maximum: 100 }
+  validates :description, length: { maximum: 2000 }
 end

@@ -12,9 +12,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// ===========
 import "stylesheets/application"
 import "@fortawesome/fontawesome-pro/js/all"
 
+// ===========
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 

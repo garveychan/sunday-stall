@@ -69,6 +69,13 @@ ActiveRecord::Schema.define(version: 2021_05_22_034912) do
     t.string "term", limit: 50, null: false
   end
 
+  create_table "keywords_stalls", id: false, force: :cascade do |t|
+    t.bigint "stall_id", null: false
+    t.bigint "keyword_id", null: false
+    t.index ["keyword_id"], name: "index_keywords_stalls_on_keyword_id"
+    t.index ["stall_id"], name: "index_keywords_stalls_on_stall_id"
+  end
+
   create_table "product_categories", force: :cascade do |t|
     t.string "name", limit: 50, null: false
   end
@@ -98,13 +105,6 @@ ActiveRecord::Schema.define(version: 2021_05_22_034912) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "search_terms", id: false, force: :cascade do |t|
-    t.bigint "stall_id", null: false
-    t.bigint "keywords_id", null: false
-    t.index ["keywords_id"], name: "index_search_terms_on_keywords_id"
-    t.index ["stall_id"], name: "index_search_terms_on_stall_id"
-  end
-
   create_table "stalls", force: :cascade do |t|
     t.string "title", limit: 50
     t.string "subtitle", limit: 100
@@ -123,11 +123,11 @@ ActiveRecord::Schema.define(version: 2021_05_22_034912) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
   add_foreign_key "favourites", "users"
+  add_foreign_key "keywords_stalls", "keywords"
+  add_foreign_key "keywords_stalls", "stalls"
   add_foreign_key "products", "product_categories"
   add_foreign_key "products", "stalls"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
-  add_foreign_key "search_terms", "keywords", column: "keywords_id"
-  add_foreign_key "search_terms", "stalls"
   add_foreign_key "stalls", "users"
 end

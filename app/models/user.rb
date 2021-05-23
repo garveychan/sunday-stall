@@ -38,6 +38,14 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :products, through: :reviews
 
+  # Validations
+  validates :email, presence: true
+  validates :encrypted_password, presence: true
+  validates :first_name, length: { maximum: 50 }
+  validates :last_name, length: { maximum: 50 }
+  validates :phone_number, length: { maximum: 12 }
+
+  # Hooks
   after_create :set_default_role, :welcome_email
 
   private

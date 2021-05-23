@@ -1,7 +1,15 @@
-ProductCategory.delete_all
-User.delete_all
-ActiveRecord::Base.connection.reset_pk_sequence!('product_categories')
-ActiveRecord::Base.connection.reset_pk_sequence!('users')
+#Clear Databases
+
+Stall.all.each { |stall| stall.image.purge }
+%w[users stalls product_categories].each do |table|
+  ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY CASCADE;")
+end
+
+Dir.glob(Rails.root.join('storage', '**', '*').to_s).sort_by(&:length).reverse.each do |x|
+  if File.directory?(x) && Dir.empty?(x)
+    Dir.rmdir(x)
+  end
+end
 
 # Seed Product Categories
 
