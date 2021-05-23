@@ -44,18 +44,4 @@ class User < ApplicationRecord
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
   validates :phone_number, length: { maximum: 12 }
-
-  # Hooks
-  after_create :set_default_role, :welcome_email
-
-  private
-
-  def welcome_email
-    UserMailer.send_welcome_email(self).deliver_later
-  end
-
-  def set_default_role
-    self.role ||= User.roles[:user]
-    self.save
-  end
 end
