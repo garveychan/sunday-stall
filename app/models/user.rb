@@ -45,7 +45,7 @@ class User < ApplicationRecord
   def welcome_email
     UserMailer.send_welcome_email(self).deliver_later
   end
-  
+
   def set_default_role
     self.role ||= User.roles[:user]
     self.save
