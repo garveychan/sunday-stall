@@ -37,13 +37,15 @@ I believe that the long tail market for local value-added goods is underserved -
 Home
 - Featured Stalls and Products
 
-Stalls / Products
+Buyer
 - View Stall with all Products
 - View Product
 
+Seller
 - Create Stall
 - Create Product
-- Edit Stall and Products
+- Edit Stall
+- Edit Product
 - Merchant Insights
 
 User
@@ -51,7 +53,7 @@ User
 - Favourites
 - Purchases
 - Messages
-- Settings (Edit User)
+- Profile (Edit User)
 
 Admin
 - All User Pages
