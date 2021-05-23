@@ -11,6 +11,6 @@ class StallsController < ApplicationController
   def show
   end
 
-  def search
+  def search_results
   end
 end

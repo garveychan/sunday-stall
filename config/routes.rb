@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  get 'stalls/search_results', to: 'stalls#search_results', as: 'search_results'
+
   resources :stalls do
     resources :products
   end
 
-  get 'stalls/search', to: 'stalls#search', as: 'search'
 end
