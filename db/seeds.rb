@@ -10,7 +10,7 @@ Dir.glob(Rails.root.join('storage', '**', '*').to_s).sort_by(&:length).reverse.e
 end
 
 # Drop tables, their dependents and restart their sequences
-%w[users stalls product_categories].each do |table|
+%w[users stalls product_categories keywords keywords_stalls].each do |table|
   ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY CASCADE;")
 end
 
@@ -37,7 +37,7 @@ end
 # Mass User Seeding
 require 'faker'
 
-100.times do
+10.times do
   User.new do |u|
     u.first_name = Faker::Name.unique.name.split.first
     u.last_name = Faker::Name.unique.name.split.last
@@ -48,4 +48,29 @@ require 'faker'
     u.password_confirmation = 'password'
     u.role = 'user'
   end.save
+end
+
+# Stall Seeding - Title, Subtitle, Description, Keywords
+stall_details = [
+  ["Bob Ross' Studio", "Powerful Paintings", "The finest custom paintings that the markets have to offer.", "Art Paint Beautiful Collections"],
+  ["Mary's Florist", "Flowers and Bouquets", "Colourful and bright - flowers for every occasion.", "Art Flowers Bouquets Roses Daisies"],
+  ["Five Pillars Fine Drinks", "Gins, Spritz, Bubbles", "Share a bottle of bubbles with incredibly nuanced flavours today!", "Beer Gin Prosecco Booze Lit"],
+  ["Sarah's Sourdough", "Fresh Bread", "Straight from the oven, these famous breads will leave you wanting more.", "Food Sourdough Brioche Baguette"],
+  ["Friendly Cuisine", "Homestyle Meals", "Delicious meals cooked in a home kitchen with love.", "Food Warm Delicious Love"]
+]
+
+stall_details.each_with_index do |array, index|
+  details = {
+    active: true,
+    description: array[2],
+    subtitle: array[1],
+    title: array[0],
+    user_id: rand(1..10)
+  }
+
+  stall = Stall.create!(details)
+
+  array[3].split.each { |keyword| k = Keyword.find_or_create_by({term: keyword}); stall.keywords << k }
+
+  stall.image.attach(io: File.open(Rails.root / 'db' / 'seed-images' / 'stalls' / "#{index + 1}.jpg"), filename:"#{index + 1}.jpg")
 end

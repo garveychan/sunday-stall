@@ -1,2 +1,9 @@
-<h1>Stalls#index</h1>
-<p>Find me in app/views/stalls/index.html.erb</p>
+<div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-12">
+  <div class="space-y-12">
+    <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+      <% @stalls.each do |stall| %>
+        <%= render "components/stall", stall: stall %>
+      <% end %>
+    </ul>
+  </div>
+</div>
