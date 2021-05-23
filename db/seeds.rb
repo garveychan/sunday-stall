@@ -37,7 +37,7 @@ end
 # Mass User Seeding
 require 'faker'
 
-10.times do
+100.times do
   User.new do |u|
     u.first_name = Faker::Name.unique.name.split.first
     u.last_name = Faker::Name.unique.name.split.last
@@ -52,11 +52,11 @@ end
 
 # Stall Seeding - Title, Subtitle, Description, Keywords
 stall_details = [
-  ["Bob Ross' Studio", "Powerful Paintings", "The finest custom paintings that the markets have to offer.", "Art Paint Beautiful Collections"],
-  ["Mary's Florist", "Flowers and Bouquets", "Colourful and bright - flowers for every occasion.", "Art Flowers Bouquets Roses Daisies"],
-  ["Five Pillars Fine Drinks", "Gins, Spritz, Bubbles", "Share a bottle of bubbles with incredibly nuanced flavours today!", "Beer Gin Prosecco Booze Lit"],
-  ["Sarah's Sourdough", "Fresh Bread", "Straight from the oven, these famous breads will leave you wanting more.", "Food Sourdough Brioche Baguette"],
-  ["Friendly Cuisine", "Homestyle Meals", "Delicious meals cooked in a home kitchen with love.", "Food Warm Delicious Love"]
+  ["Bob Ross' Studio", "Powerful Paintings", "The finest custom paintings that the markets have to offer.", "Art Paint Beautiful Collections Emotion Moving"],
+  ["Mary's Florist", "Flowers and Bouquets", "Colourful and bright - flowers for every occasion.", "Art Flowers Bouquets Roses Daisies Flora Gift Special"],
+  ["Five Pillars Fine Drinks", "Gins, Spritz, Bubbles", "Share a bottle of bubbles with incredibly nuanced flavours today!", "Beer Gin Prosecco Booze Lit Tipsy Fun Alcohol"],
+  ["Levain Artisans", "Fresh Bread", "Straight from the oven, these famous breads will leave you wanting more.", "Food Sourdough Brioche Baguette Bread Baking Yeast"],
+  ["Community Cuisine", "Homestyle Meals", "Delicious meals cooked in a home kitchen with love.", "Food Warm Delicious Love Friends Community"]
 ]
 
 stall_details.each_with_index do |array, index|
@@ -70,7 +70,7 @@ stall_details.each_with_index do |array, index|
 
   stall = Stall.create!(details)
 
-  array[3].split.each { |keyword| k = Keyword.find_or_create_by({term: keyword}); stall.keywords << k }
+  array[3].split.each { |keyword| k = Keyword.find_or_create_by({term: keyword.downcase}); stall.keywords << k }
 
   stall.image.attach(io: File.open(Rails.root / 'db' / 'seed-images' / 'stalls' / "#{index + 1}.jpg"), filename:"#{index + 1}.jpg")
 end
