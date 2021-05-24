@@ -34,9 +34,7 @@ class User < ApplicationRecord
   # Associations
   has_one :address, dependent: :destroy
   has_one :stall, dependent: :destroy
-
-  has_many :reviews
-  has_many :products, through: :reviews
+  has_many :favourites, dependent: :destroy
 
   # Validations
   validates :email, presence: true

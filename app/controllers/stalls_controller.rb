@@ -1,6 +1,6 @@
 class StallsController < ApplicationController
+  load_resource only: %i[show edit update destroy]
   before_action :check_user_stall, only: %i[new create]
-  before_action :set_stall, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: %i[index show]
 
   # Eager loading to prevent N+1 database queries when rendering cards on stalls index page.

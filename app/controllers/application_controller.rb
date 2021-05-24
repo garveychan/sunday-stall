@@ -3,12 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  
   protected
   ######################################
   # Search Feature
   ######################################
-  # Using universal callback via Application Controller,
+  # Using a universal callback via the Application Controller,
   # the search function can be performed anywhere on the website with the navigation bar.
   # If any request contains a 'search' parameter,
   # then the application recognises that a search has been recognised.
@@ -22,7 +21,8 @@ class ApplicationController < ActionController::Base
   def search?
     if params[:search]
       @stalls = Stall.includes(image_attachment: :blob).joins(:keywords).where( keywords: { term: params[:search].downcase } )
-      render "stalls/index" 
+      @search = true
+      render "stalls/results" 
     end
   end
   #####################################

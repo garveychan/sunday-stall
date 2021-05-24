@@ -19,6 +19,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Favourite < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: :user_id
   belongs_to :favouriteable, polymorphic: true
+
+  # Extend scope for filtering by relevant object and user
+  scope :for_user, -> (user) { where(user_id: user.id) }
+  scope :stalls, -> { where(favouriteable_type: "Stall") }
+  scope :products, -> { where(favouriteable_type: "Product") }
 end

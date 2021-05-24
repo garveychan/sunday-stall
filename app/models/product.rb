@@ -29,7 +29,6 @@ class Product < ApplicationRecord
 
   has_many :reviews
   has_many :users, through: :reviews
-
   has_many_attached :images # blobs automatically purged if product deleted
-  has_many :favourites, as: :favouriteable
+  has_many :favourites, as: :favouriteable, dependent: :destroy
 end

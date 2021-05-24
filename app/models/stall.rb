@@ -35,5 +35,5 @@ class Stall < ApplicationRecord
   validates :subtitle, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 2000 }
   validates :keywords, presence: true
-  validates :image, attached: true, size: { less_than: 10.megabytes , message: 'larger than 10MB!' }
+  validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
 end

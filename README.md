@@ -39,6 +39,7 @@ Home
 
 Buyer
 -- View all Stalls | stalls, stalls#index
+  - Pagination
 -- View Stall with all Products | stalls/id, stalls#show
 - View Product | stalls/id/products/id, products#show
 -- Search Results | stalls/search, stalls#index -> with different @stalls instance
@@ -55,6 +56,11 @@ User
   -- Sign Up | users/sign_up, devise/registrations#new
   -- Forgot Password? | users/password/new, devise/passwords#new
 - Favourites | favourites, favourites#index
+  - 
+  - Logged out -> Sign Up page -> Add favourite
+  - Logged in -> not favourited? -> favourite
+  - Logged in -> favourited? -> unfavourite
+
 - Profile (Edit User)
   - Edit Profile | users/edit, devise/registrations#edit
 

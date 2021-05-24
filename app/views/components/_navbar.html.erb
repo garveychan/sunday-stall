@@ -30,7 +30,7 @@
       <% end %>
         <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
       <% if current_user %>
-        <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Favourites</a>
+        <%= link_to "Favourites", favourites_path, class:"mx-2 hover:text-gray-900" %>
         <%= link_to "Profile", edit_user_registration_path, class: "mx-2 hover:text-gray-900" %>
       <% end %>
     </nav>
