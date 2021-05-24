@@ -1,2 +1,59 @@
-<h1>Stalls#show</h1>
-<p>Find me in app/views/stalls/show.html.erb</p>
+<% stall = @stall %>
+<main>
+  <div>
+    <div class="relative my-12 z-0">
+      <div class="absolute inset-x-0 bottom-0 h-1/2 z-0"></div>
+      <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
+        <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden z-0">
+          <div class="absolute inset-0 z-0">
+            <img class="h-full w-full object-cover" src="<%= asset_path(url_for(stall.image)) %>" alt="Stall Cover Photo">
+          </div>
+          <div class="relative px-4 py-24 sm:px-6 sm:py-36 lg:py-48 lg:px-8 z-0">
+            <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              <span class="block text-white "><%= stall.title %></span>
+            </h1>
+            <h3 class="text-center text-xl font-extrabold tracking-tight sm:text-2xl lg:text-3xl">
+              <span class="block text-indigo-600"><%= stall.subtitle %></span>
+            </h3>
+            <p class="mt-6 max-w-lg mx-auto text-center text-xl text-white sm:max-w-3xl">
+              <%= stall.description %>
+            </p>
+            <div class="mt-5 mx-auto md:mt-8 flex justify-center">
+              <div class="lg:w-1/12 w- md:w-1/8 sm:w-1/4">
+                <a href="#products" class="flex items-center justify-center px-8 py-3text-base font-medium text-xl text-white hover:text-indigo-700 md:py-2 md:px-8">
+                  <i class="far fa-arrow-down "></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <a id="products" class="relative -top-24"></a>
+  <div class="container px-5 my-12 mx-auto">
+    <div class="flex flex-wrap w-full mb-5">
+      <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Our Products</h1>
+        <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+      </div>
+      <div class="lg:w-1/2 w-full leading-relaxed text-right">
+        <% if can? :update, stall %>
+          <%= link_to "Edit Stall", edit_stall_path, class: "cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <% end %>
+        <% if can? :destroy, stall %>
+          <%= link_to "Delete Stall", stall_path, method: :delete, class: "mx-2 inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-red-600 hover:bg-red-700" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-wrap -m-4">
+      <% 8.times do %>
+        <%= render "components/product" %>
+      <% end %>
+    </div>
+  </div>
+</main>

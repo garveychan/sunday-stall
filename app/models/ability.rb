@@ -6,10 +6,17 @@ class Ability
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
-      user ||= User.new # guest user (not logged in)
+      user ||= User.new
+
       if user.admin_role?
         can :manage, :all
         can :access, :rails_admin
+      end
+
+      if user.present?
+        can :edit, Stall, user_id: user.id
+        can :update, Stall, user_id: user.id
+        can :destroy, Stall, user_id: user.id
       end
     #
     # The first argument to `can` is the action you are giving the user

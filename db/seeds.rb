@@ -37,7 +37,9 @@ end
 # Mass User Seeding
 require 'faker'
 
-100.times do
+number_of_users = 20
+
+number_of_users.times do
   User.new do |u|
     u.first_name = Faker::Name.unique.name.split.first
     u.last_name = Faker::Name.unique.name.split.last
@@ -54,7 +56,7 @@ end
 stall_details = [
   ["Bob Ross' Studio", "Powerful Paintings", "The finest custom paintings that the markets have to offer.", "Art Paint Beautiful Collections Emotion Moving"],
   ["Mary's Florist", "Flowers and Bouquets", "Colourful and bright - flowers for every occasion.", "Art Flowers Bouquets Roses Daisies Flora Gift Special"],
-  ["Five Pillars Fine Drinks", "Gins, Spritz, Bubbles", "Share a bottle of bubbles with incredibly nuanced flavours today!", "Beer Gin Prosecco Booze Lit Tipsy Fun Alcohol"],
+  ["Five Pillars Fine Drinks", "Gins, Spritz, Bubbles", "Share a bottle of bubbles with friends today!", "Beer Gin Prosecco Booze Lit Tipsy Fun Alcohol"],
   ["Levain Artisans", "Fresh Bread", "Straight from the oven, these famous breads will leave you wanting more.", "Food Sourdough Brioche Baguette Bread Baking Yeast"],
   ["Community Cuisine", "Homestyle Meals", "Delicious meals cooked in a home kitchen with love.", "Food Warm Delicious Love Friends Community"]
 ]
@@ -64,11 +66,14 @@ stall_details.each_with_index do |array, index|
     active: true,
     description: array[2],
     subtitle: array[1],
-    title: array[0],
-    user_id: rand(1..10)
+    title: array[0]
   }
 
-  stall = Stall.create!(details)
+  user_ids = (1..number_of_users).to_a.sample(stall_details.size)
+  details[:user_id] = user_ids[index]
+
+  stall = Stall.new(details)
+  stall.save(validate: false)
 
   array[3].split.each { |keyword| k = Keyword.find_or_create_by({term: keyword.downcase}); stall.keywords << k }
 

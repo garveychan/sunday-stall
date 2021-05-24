@@ -10,7 +10,9 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      blur: ['hover', 'focus']
+    },
   },
   plugins: [
     require('@tailwindcss/forms')

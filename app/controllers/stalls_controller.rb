@@ -8,7 +8,9 @@ class StallsController < ApplicationController
     @stalls = Stall.includes([image_attachment: :blob]).all
   end
 
-  def show; end
+  def show
+    @stall = get_stall
+  end
 
   def new
     @stall = Stall.new
@@ -48,17 +50,35 @@ class StallsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @stall = get_stall
 
-  def update; end
+    if can? :edit, @stall
+    else
+      flash[:error] = "You don't have permission to do that."
+      render :show
+    end
+  end
+  
+  def update
+    @stall = get_stall
 
-  def destroy; end
+
+  end
+
+  def destroy
+  
+  end
 
   def search_results
     # @relevant_stalls =
   end
 
   private
+
+  def get_stall
+    Stall.find(params[:id])
+  end
 
   def existing_stall_redirect
     # Send alert and redirect to existing stall.
