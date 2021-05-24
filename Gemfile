@@ -28,6 +28,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 # Custom Gems
 
+# Validation
+gem 'active_storage_validations'
+
 ## Styling
 gem "view_component", require: "view_component/engine"
 

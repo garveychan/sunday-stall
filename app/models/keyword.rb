@@ -7,4 +7,6 @@
 #
 class Keyword < ApplicationRecord
   has_and_belongs_to_many :stalls, touch: true
+
+  validates_presence_of :term
 end
