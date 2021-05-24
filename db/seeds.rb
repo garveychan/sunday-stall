@@ -77,5 +77,5 @@ stall_details.each_with_index do |array, index|
 
   array[3].split.each { |keyword| k = Keyword.find_or_create_by({term: keyword.downcase}); stall.keywords << k }
 
-  stall.image.attach(io: File.open(Rails.root / 'db' / 'seed-images' / 'stalls' / "#{index + 1}.jpg"), filename:"#{index + 1}.jpg")
+  stall.image.attach(io: File.open(Rails.root / 'db' / 'seed-images' / 'stalls' / "#{index + 1}.jpeg"), filename:"#{index + 1}.jpeg")
 end
