@@ -35,32 +35,31 @@ I believe that the long tail market for local value-added goods is underserved -
 ##### Sitemap
 
 Home
-- Featured Stalls and Products | root, home#index
+-- Featured Stalls and Products | root, home#index
 
 Buyer
-- View all Stalls | stalls, stalls#index
-- View Stall with all Products | stalls/id, stalls#show
+-- View all Stalls | stalls, stalls#index
+-- View Stall with all Products | stalls/id, stalls#show
 - View Product | stalls/id/products/id, products#show
-- Search Results | stalls/search, stalls#index -> with different @stalls instance
-- Favourites | favourites, favourites#index
+-- Search Results | stalls/search, stalls#index -> with different @stalls instance
 
 Seller
-- Create Stall | stalls/new, stalls#create
+-- Create Stall | stalls/new, stalls#create
 - Create Product | stalls/id/products/new, products#create
-- Edit Stall | stalls/id/edit, stalls#edit
+-- Edit Stall | stalls/id/edit, stalls#edit
 - Edit Product | stalls/id/products/id/edit, products#edit
 
 User
-- Authentication
-  - Log In | users/sign_in, devise/sessions#new
-  - Sign Up | users/sign_up, devise/registrations#new
-  - Forgot Password? | users/password/new, devise/passwords#new
+-- Authentication
+  -- Log In | users/sign_in, devise/sessions#new
+  -- Sign Up | users/sign_up, devise/registrations#new
+  -- Forgot Password? | users/password/new, devise/passwords#new
 - Favourites | favourites, favourites#index
 - Profile (Edit User)
   - Edit Profile | users/edit, devise/registrations#edit
 
 Admin
-- Dashboard | /admin, RailsAdmin::Engine
+-- Dashboard | /admin, RailsAdmin::Engine
 
 <!-- - Purchases | purchases, purchases#index -->
 <!-- - Merchant Insights -->
