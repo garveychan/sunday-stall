@@ -28,10 +28,11 @@
       <% else %>
         <%= link_to "Create Stall", new_stall_path, class: "mx-2 hover:text-gray-900" %>
       <% end %>
-      <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
-      <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Favourites</a>
-      <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Purchases</a>
-      <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Profile</a>
+        <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
+      <% if current_user %>
+        <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Favourites</a>
+        <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Profile</a>
+      <% end %>
     </nav>
 
     <button class="mx-2 inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-500 hover:bg-indigo-600">
