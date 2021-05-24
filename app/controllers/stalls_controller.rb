@@ -91,7 +91,6 @@ class StallsController < ApplicationController
   # Ensure User has permission to destroy the Stall record.
   # Attempt to destroy the record and redirect to landing page if successful.
   # The destroy method will delete the Stall record and any dependents as described by its model.
-  # 
   def destroy
     if can? :destroy, @stall
       if @stall.destroy
@@ -107,7 +106,6 @@ class StallsController < ApplicationController
   end
 
   private
-
   # Look for an associated stall record with id specified by the parameters.
   # Assign the record to an instance method for the View to access.
   def set_stall
