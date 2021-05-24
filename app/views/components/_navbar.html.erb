@@ -2,7 +2,7 @@
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href=<%= root_path %>>
       <%= render "components/stand" %>
-      <span class="ml-3 text-xl text-indigo-600">SundayStall</span>
+      <span class="ml-3 text-xl text-indigo-700">SundayStall</span>
     </a>
 
     <form>
@@ -31,11 +31,11 @@
         <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
       <% if current_user %>
         <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Favourites</a>
-        <a class="mx-2 hover:text-gray-900" href=<%= root_path %>>Profile</a>
+        <%= link_to "Profile", edit_user_registration_path, class: "mx-2 hover:text-gray-900" %>
       <% end %>
     </nav>
 
-    <button class="mx-2 inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-500 hover:bg-indigo-600">
+    <button class="mx-2 inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-600 hover:bg-indigo-700">
       <% if current_user.nil? %>
         <%= link_to "Log In", new_user_session_path %>
       <% else %>

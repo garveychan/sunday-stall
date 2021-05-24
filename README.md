@@ -41,7 +41,7 @@ Buyer
 - View all Stalls | stalls, stalls#index
 - View Stall with all Products | stalls/id, stalls#show
 - View Product | stalls/id/products/id, products#show
-- Search Results | stalls/search, stalls#search
+- Search Results | stalls/search, stalls#index -> with different @stalls instance
 
 Seller
 - Create Stall | stalls/new, stalls#create
@@ -55,14 +55,13 @@ User
   - Sign Up | users/sign_up, devise/registrations#new
   - Forgot Password? | users/password/new, devise/passwords#new
 - Favourites | favourites, favourites#index
-- Purchases | purchases, purchases#index
-- Profile (Edit User) | users/id, users#show
-  - Edit Details | users/id/profile, users#edit
-  - Edit Registration | users/edit, devise/registrations#edit
+- Profile (Edit User)
+  - Edit Profile | users/edit, devise/registrations#edit
 
 Admin
 - Dashboard | /admin, RailsAdmin::Engine
 
+<!-- - Purchases | purchases, purchases#index -->
 <!-- - Merchant Insights -->
 <!-- - Messaging -->
 
