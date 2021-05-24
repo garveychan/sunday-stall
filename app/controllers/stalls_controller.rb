@@ -62,8 +62,19 @@ class StallsController < ApplicationController
   
   def update
     @stall = get_stall
-
-
+    respond_to do |format|
+      if @stall.update(stall_params)
+        if stall_params[:image]
+          @stall.image.purge
+          @stall.image.attach(stall_params[:image])
+        end
+        flash[:success] = 'Your changes have been made!'
+        format.html { redirect_to @stall }
+      else
+        flash[:error] = @stall.errors.full_messages
+        format.html { redirect_to edit_stall_path }
+      end
+    end
   end
 
   def destroy

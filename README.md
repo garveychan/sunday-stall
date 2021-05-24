@@ -42,6 +42,7 @@ Buyer
 - View Stall with all Products | stalls/id, stalls#show
 - View Product | stalls/id/products/id, products#show
 - Search Results | stalls/search, stalls#index -> with different @stalls instance
+- Favourites | favourites, favourites#index
 
 Seller
 - Create Stall | stalls/new, stalls#create
