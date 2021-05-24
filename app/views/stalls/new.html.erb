@@ -13,7 +13,7 @@
         <div class="form-group py-2">
           <div class="field">
             <h4><%= form.label :title %></h4>
-            <%= form.text_field :title, {maxlength: 50, class:"form-control", placeholder: "Enter title"}%>
+            <%= form.text_field :title, {maxlength: 50, class:"form-control", placeholder: "Donatello's"}%>
             <% @stall.errors.full_messages_for(:title).each do |message| %>
               <div><%= message %></div>
             <% end %>
@@ -22,7 +22,7 @@
         <div class="form-group py-2">
           <div class="field">
             <h4><%= form.label :subtitle %></h4>
-            <%= form.text_field :subtitle, {maxlength: 100, class:"form-control", placeholder: "Enter subtitle"}%>
+            <%= form.text_field :subtitle, {maxlength: 100, class:"form-control", placeholder: "Woodfired Pizza"}%>
             <% @stall.errors.full_messages_for(:subtitle).each do |message| %>
               <div><%= message %></div>
             <% end %>
@@ -31,7 +31,7 @@
         <div class="form-group py-2">
           <div class="field">
             <h4><%= form.label :description %></h4>
-            <%= form.text_area :description, {maxlength: 2000, class:"form-control", placeholder: "Enter description"}%>
+            <%= form.text_area :description, {maxlength: 2000, class:"form-control", placeholder: "This is the best pizza stall ever!"}%>
             <% @stall.errors.full_messages_for(:description).each do |message| %>
               <div><%= message %></div>
             <% end %>
@@ -39,8 +39,13 @@
         </div>
         <div class="form-group py-2">
           <div class="field">
-            <h4><%= form.label :keywords %></h4>
-            <%= form.text_area :keywords, {maxlength: 2000, class:"form-control", placeholder: "Enter some keywords"}%>
+            <%= form.fields_for :keywords do |keywords_form| %>
+              <h4><%= keywords_form.label :term, "Enter some keywords to help people find you:" %></h4>
+              <%= keywords_form.text_area :term, {maxlength: 2000, class:"form-control", placeholder: "Mozzarella, Margherita, Pepperoni, Pizza"}%>
+              <% @stall.errors.full_messages_for(:term).each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            <% end %>
           </div>
         </div>
         <div class="form-group py-3">
@@ -50,7 +55,7 @@
           </div>
         </div>
         <div class="actions py-3">
-          <% if current_page? new_stall_path%>
+          <% if current_page? new_stall_path %>
             <%= form.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
           <% else %>
             <%= form.submit "Save Changes", class: "btn btn-primary btn-lg btn-block" %>

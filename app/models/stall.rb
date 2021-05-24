@@ -22,15 +22,18 @@
 class Stall < ApplicationRecord
   # Associations
   belongs_to :user
-  has_many :products, dependent: :destroy
-  has_and_belongs_to_many :keywords, dependent: :destroy
   has_one_attached :image # blobs automatically purged if stall is deleted
   has_many :favourites, as: :favouriteable
+  has_many :products, dependent: :destroy
+  has_and_belongs_to_many :keywords
+  accepts_nested_attributes_for :keywords, reject_if: lambda {|attributes| attributes['term'].blank?}
 
   # Validations
   validates :active, presence: true
   validates :user_id, presence: true
-  validates :title, length: { maximum: 50 }
-  validates :subtitle, length: { maximum: 100 }
-  validates :description, length: { maximum: 2000 }
+  validates :title, presence: true, length: { maximum: 50 }
+  validates :subtitle, presence: true, length: { maximum: 100 }
+  validates :description, presence: true, length: { maximum: 2000 }
+  validates_associated :image, presence: true
+  validates_associated :keywords, presence: true
 end
