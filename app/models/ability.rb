@@ -17,6 +17,8 @@ class Ability
         can :edit, Stall, user_id: user.id
         can :update, Stall, user_id: user.id
         can :destroy, Stall, user_id: user.id
+        can :create, Favourite, user_id: user.id
+        can :destroy, Favourite, user_id: user.id
       end
     #
     # The first argument to `can` is the action you are giving the user
