@@ -4,15 +4,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-  
-  # Redirect to stalls#search action if search parameters detected.
-  # Search parameters are passed as a flash for stalls#search to process.
-  def search_request?
-      redirect_to search_stalls_path, flash: { search: params[:search] }  if params[:search]
-  end
 
   #########################################################
-   # Fetching Polymorphic Favourites (Stalls and Products)
+  # Fetching Polymorphic Favourites (Stalls and Products)
   #########################################################
   # The methods below leverage polymorphic associations and eager loading to quickly
   # present an instance variable carrying specified objects for rendering.
@@ -27,12 +21,18 @@ class ApplicationController < ActionController::Base
   # Additional check methods defined for status inspecting - no attachments loaded.
   def get_favourite(model)
     Favourite.includes([:favouriteable]).send(model).for_user(current_user)
-              .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
-              .map(&:favouriteable)
+             .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
+             .map(&:favouriteable)
   end
 
   def check_favourite(model)
     Favourite.includes([:favouriteable]).send(model).for_user(current_user).map(&:favouriteable)
+  end
+
+  # Redirect to stalls#search action if search parameters detected.
+  # Search parameters are passed as a flash for stalls#search to process.
+  def search_request?
+    redirect_to search_stalls_path, flash: { search: params[:search] } if params[:search]
   end
 
   # Add extra parameters to devise's sanitizer so further user details
