@@ -36,4 +36,10 @@ class Stall < ApplicationRecord
   validates :description, presence: true, length: { maximum: 2000 }
   validates :keywords, presence: true
   validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
+
+  # Delegations
+  # By the Law of Demeter, models should only talk to their immediate associations.
+  # This reduces dependencies, enabling code reuse and easier maintainability.
+  # e.g. View will call stall.user_email instead of stall.user.email
+  delegate :email, to: :user, prefix: true
 end
