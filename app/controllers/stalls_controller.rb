@@ -11,7 +11,7 @@ class StallsController < ApplicationController
 
   # Render standard show response
   def show
-    @favourited = true if check_favourite_stalls.include? @stall
+    @favourited = true if check_favourite(:stalls).include? @stall
   end
 
   # Create an empty Stall object and assign it to the instance variable so the creation form can be generated.
