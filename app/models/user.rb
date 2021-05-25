@@ -32,7 +32,6 @@ class User < ApplicationRecord
   enum role: { admin: 'admin', moderator: 'moderator', user: 'user'}, _suffix: true, _default: :user
 
   # Associations
-  has_one :address, dependent: :destroy
   has_one :stall, dependent: :destroy
   has_many :favourites, dependent: :destroy
 
