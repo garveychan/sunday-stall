@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
 
   get "/favourites", to: "favourites#index", as: "favourites"
-  post "/stalls/:id", to: "favourites#create", as: "new_favourite_stall"
-  delete "/stalls/:id", to: "favourites#destroy", as: "delete_favourite_stall"
-  post "/stalls/:stall_id/products/:id", to: "favourites#create", as: "new_favourite_product"
-  delete "/stalls/:stall_id/products/:id", to: "favourites#destroy", as: "delete_favourite_product"
+  post "/stalls/:id", to: "favourites#create", as: "add_favourite_stall"
+  delete "/stalls/:id", to: "favourites#destroy", as: "remove_favourite_stall"
+  post "/stalls/:stall_id/products/:id", to: "favourites#create", as: "add_favourite_product"
+  delete "/stalls/:stall_id/products/:id", to: "favourites#destroy", as: "remove_favourite_product"
 end
