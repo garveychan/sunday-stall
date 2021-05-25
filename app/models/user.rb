@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   # User Role Enum
   # user.admin_role? user.moderator_role? user.user_role?
-  enum role: { admin: 'admin', moderator: 'moderator', user: 'user'}, _suffix: true
+  enum role: { admin: 'admin', moderator: 'moderator', user: 'user'}, _suffix: true, _default: :user
 
   # Associations
   has_one :address, dependent: :destroy
@@ -42,7 +42,4 @@ class User < ApplicationRecord
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
   validates :phone_number, length: { maximum: 12 }
-
-  # Default Values
-  after_initialize { |user| user.role = User.roles[:user] }
 end

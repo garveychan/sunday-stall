@@ -54,7 +54,7 @@ User
   -- Log In | users/sign_in, devise/sessions#new
   -- Sign Up | users/sign_up, devise/registrations#new
   -- Forgot Password? | users/password/new, devise/passwords#new
-- Favourites | favourites, favourites#index
+-- Favourites | favourites, favourites#index
   -- Logged out -> Sign Up page -> Add favourite
   -- Logged in -> not favourited? -> favourite
   -- Logged in -> favourited? -> unfavourite
