@@ -16,23 +16,28 @@ class FavouritesController < ApplicationController
         flash[:success] = 'Favourited!'
       else
         flash[:error] = 'Sorry, something went wrong.'
-      end  
-      redirect_to stall_path
+      end
+    else
+      flash[:error] = "You don't have permission to do that."
     end
+    redirect_to stall_path
   end
 
   def destroy
     if can? :destroy, @favourite
       if @favourite.destroy
-        flash[:alert] = ["Sorry to see you go!","Let us know if there's anything we can do better."]
+        flash[:alert] = ['Sorry to see you go!', "Let us know if there's anything we can do better."]
       else
         flash[:error] = 'Sorry, something went wrong.'
-      end  
-      redirect_to stall_path
+      end
+    else
+        flash[:error] = "You don't have permission to do that."
     end
+    redirect_to stall_path
   end
 
   private
+
   def set_stall
     @stall ||= Stall.find_by(id: params[:id])
   end
@@ -40,7 +45,7 @@ class FavouritesController < ApplicationController
   def set_favourite
     set_stall
     if check_favourite(:stalls).include? @stall
-      @favourite = Favourite.find_by(user_id: current_user.id)
+      @favourite = Favourite.stalls.for_user(current_user).for_object(@stall).first
     else
       @favourite = Favourite.new(favouriteable: @stall, user_id: current_user.id)
       @favourite[:favouriteable_type] = @favourite[:favouriteable_type].camelize

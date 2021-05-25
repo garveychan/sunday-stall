@@ -24,6 +24,7 @@ class Favourite < ApplicationRecord
 
 # Extend scope for filtering by relevant object and user
   scope :for_user, -> (user) { where(user_id: user&.id) }
+  scope :for_object, -> (object) { where(favouriteable_id: object&.id) }
   scope :stalls, -> { where(favouriteable_type: "Stall") }
   scope :products, -> { where(favouriteable_type: "Product") }
 end
