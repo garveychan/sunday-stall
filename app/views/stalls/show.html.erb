@@ -61,10 +61,14 @@
             Delete Stall
           </button>
         <% else %>
+            <% if @favourited %>
+              <%= button_to "", delete_favourite_stall_path, method: :delete, class: "inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+  
+            <% else %>
           <button type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <i class="far fa-heart"></i>
-            <%# <i class="fas fa-heart"></i> for favourited %>
+              <i class="far fa-heart"></i>
           </button>
+            <% end %>
         <% end %>
       </div>
     </div>
@@ -76,7 +80,6 @@
   </div>
 </section>
 </main>
-
 <%# Delete Confirmation Modal %>
 <div id="delete-modal" class="modal fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

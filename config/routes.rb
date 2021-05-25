@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :stalls do
     resources :products
+    get 'search', on: :collection
   end
 
   get "/favourites", to: "favourites#index", as: "favourites"

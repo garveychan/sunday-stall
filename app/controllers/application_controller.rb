@@ -1,31 +1,40 @@
 class ApplicationController < ActionController::Base
-  before_action :search?
+  before_action :search_request?
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-  ######################################
-  # Search Feature
-  ######################################
-  # Using a universal callback via the Application Controller,
-  # the search function can be performed anywhere on the website with the navigation bar.
-  # If any request contains a 'search' parameter,
-  # then the application recognises that a search has been recognised.
-  # It then sets a range of 'stalls' as an instance variable for the universal 'stall' card partial to be rendered.
-  # This helps keep the partial DRY.
-  # The relevant stalls are then eager loaded along with their image blobs, and filtered by the search parameters.
-  # The has_and_belongs_to_many relationship with the keyword database is leveraged to find relevant stalls.
-  # The stall index page is then rendered, not redirected.
-  # Tha allows this controller action to pass its instance variable to the view instead of stall controller showing all.
-
-  def search?
-    if params[:search]
-      @stalls = Stall.includes(image_attachment: :blob).joins(:keywords).where( keywords: { term: params[:search].downcase } )
-      @search = true
-      render "stalls/results" 
-    end
+  
+  # Redirect to stalls#search action if search parameters detected.
+  # Search parameters are passed as a flash for stalls#search to process.
+  def search_request?
+      redirect_to search_stalls_path, flash: { search: params[:search] }  if params[:search]
   end
-  #####################################
+
+  #########################################################
+   # Fetching Polymorphic Favourites (Stalls and Products)
+  #########################################################
+  # The methods below leverage polymorphic associations and eager loading to quickly
+  # present an instance variable carrying specified objects for rendering.
+  # Step-by-step:
+  # 1. (.includes) - All associated Stalls/Products are eager loaded using the 'favouriteable' association.
+  # 2. (.stalls) - Select all Favourite records pertaining to Stalls based on scope proc defined in the model.
+  # 3. (.for_user) - The Favourite records pertaining to Stalls are filtered by user_id,
+  # 3. cont. - matching the current_user passed through as an argument.
+  # 4. (.includes) - Stalls and their Active Storage attachments/blobs are eager loaded via a nested 'includes' method.
+  # 5. (.map) - The Favourite records are used to fetch their corresponding Stalls and returned as an array.
+  # These arrays are assigned to instance variables and picked up by the View for rendering
+  def get_favourite_stalls
+    Favourite.includes([:favouriteable]).stalls.for_user(current_user)
+              .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
+              .map(&:favouriteable)
+  end
+
+  def get_favourite_products
+    Favourite.includes([:favouriteable]).products.for_user(current_user)
+             .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
+             .map(&:favouriteable)
+  end
 
   # Add extra parameters to devise's sanitizer so further user details
   # can be persisted via the registration page.

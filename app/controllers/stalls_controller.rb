@@ -1,7 +1,7 @@
 class StallsController < ApplicationController
   load_resource only: %i[show edit update destroy]
   before_action :check_user_stall, only: %i[new create]
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show search]
 
   # Eager loading to prevent N+1 database queries when rendering cards on stalls index page.
   # Note this eager loads image blobs via the image_attachment association with the Stall model.
@@ -11,6 +11,7 @@ class StallsController < ApplicationController
 
   # Render standard show response
   def show
+    @favourited = true if get_favourite_stalls.include? @stall
   end
 
   # Create an empty Stall object and assign it to the instance variable so the creation form can be generated.
@@ -105,19 +106,26 @@ class StallsController < ApplicationController
     end
   end
 
+  #################
+  # Search Feature
+  #################
+  # Using a universal callback via the Application Controller,
+  # the search function can be performed anywhere on the website with the navigation bar.
+  # If any request contains a 'search' parameter,
+  # then the application recognises that a search has been performed and redirects to this controller action.
+  # The action sets a range of 'stalls' as an instance variable for the universal 'stall' card partial to be rendered.
+  # This helps keep the partial DRY.
+  # The relevant stalls are then eager loaded along with their image blobs, and filtered by the search parameters.
+  # The has_and_belongs_to_many relationship with the keyword database is leveraged to find relevant stalls.
+  # The stalls results page is then rendered.
+  def search
+    @results = Stall.includes(image_attachment: :blob).joins(:keywords)
+                   .where( keywords: { term: flash[:search].downcase } )
+    flash.delete :search
+    render 'stalls/results'
+  end
+
   private
-  # Look for an associated stall record with id specified by the parameters.
-  # Assign the record to an instance method for the View to access.
-  def set_stall
-    @stall = Stall.find(params[:id])
-  end
-
-  # Send alert and redirect to existing stall.
-  def existing_stall_redirect
-    flash[:alert] = 'You already have a stall!'
-    redirect_to @stall
-  end
-
   # Check if the current user has a stall and assign to instance variable and redirect from action.
   def check_user_stall
     if current_user.stall
@@ -126,6 +134,12 @@ class StallsController < ApplicationController
     else
       @stall = nil
     end
+  end
+
+  # Send alert and redirect to existing stall.
+  def existing_stall_redirect
+    flash[:alert] = 'You already have a stall!'
+    redirect_to @stall
   end
 
   # Leverage 'strong parameters' to defend against malicious attacks.
