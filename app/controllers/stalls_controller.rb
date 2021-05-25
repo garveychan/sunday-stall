@@ -11,7 +11,7 @@ class StallsController < ApplicationController
 
   # Render standard show response
   def show
-    @favourited = true if get_favourite_stalls.include? @stall
+    @favourited = true if check_favourite_stalls.include? @stall
   end
 
   # Create an empty Stall object and assign it to the instance variable so the creation form can be generated.
@@ -111,8 +111,8 @@ class StallsController < ApplicationController
   #################
   # Using a universal callback via the Application Controller,
   # the search function can be performed anywhere on the website with the navigation bar.
-  # If any request contains a 'search' parameter,
-  # then the application recognises that a search has been performed and redirects to this controller action.
+  # If any request contains a 'search' parameter, then the application recognises that a search has been performed
+  # and redirects to this controller action with the parameter as a 'flash'.
   # The action sets a range of 'stalls' as an instance variable for the universal 'stall' card partial to be rendered.
   # This helps keep the partial DRY.
   # The relevant stalls are then eager loaded along with their image blobs, and filtered by the search parameters.

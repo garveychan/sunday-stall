@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   # 4. (.includes) - Stalls and their Active Storage attachments/blobs are eager loaded via a nested 'includes' method.
   # 5. (.map) - The Favourite records are used to fetch their corresponding Stalls and returned as an array.
   # These arrays are assigned to instance variables and picked up by the View for rendering
+  # Additional check methods defined for status inspecting - no attachments loaded.
   def get_favourite_stalls
     Favourite.includes([:favouriteable]).stalls.for_user(current_user)
               .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
@@ -35,6 +36,15 @@ class ApplicationController < ActionController::Base
              .includes(:favouriteable, { favouriteable: { image_attachment: :blob } })
              .map(&:favouriteable)
   end
+
+  def check_favourite_stalls
+    Favourite.includes([:favouriteable]).stalls.for_user(current_user).map(&:favouriteable)
+  end
+
+  def check_favourite_products
+    Favourite.includes([:favouriteable]).products.for_user(current_user).map(&:favouriteable)
+  end
+  # Refactor
 
   # Add extra parameters to devise's sanitizer so further user details
   # can be persisted via the registration page.

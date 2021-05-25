@@ -1,0 +1,52 @@
+<div class="bg-white">
+  <div class="relative sm:py-8">
+    <div aria-hidden="true" class="hidden sm:block">
+    </div>
+    <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="relative rounded-2xl px-6 py-10 bg-indigo-600 overflow-hidden shadow-xl sm:px-12 sm:py-20">
+        <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
+          <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+            <path class="text-indigo-500 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z" />
+            <path class="text-indigo-700 text-opacity-40" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z" />
+          </svg>
+        </div>
+        <div class="relative">
+          <div class="sm:text-center">
+            <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+              Sorry, it doesn't look like you have any favourites yet.
+            </h2>
+            <p class="mt-6 mx-auto max-w-2xl text-lg text-indigo-200">
+              Check out some of the stalls below for inspiration!
+            </p>
+          </div>
+          <div class="mt-5 mx-auto md:mt-8 flex justify-center">
+            <div class="lg:w-1/12 w- md:w-1/8 sm:w-1/4">
+              <a href="#stalls" class="flex items-center justify-center px-8 py-3text-base font-medium text-xl text-white hover:text-indigo-200 md:py-2 md:px-8">
+                <i class="far fa-arrow-down "></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a id="stalls" class="relative -top-12"></a>
+    <div class="container px-5 my-12 mx-auto">
+      <div class="flex flex-wrap w-full mb-5">
+        <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Featured Stalls</h1>
+          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+        </div>
+      <p class="lg:w-1/2 w-full leading-relaxed text-gray-500 text-right">Seriously incredible.</p>
+      </div>
+      <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-12">
+        <div class="space-y-12">
+          <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+            <% @stalls.sample(6).each do |stall| %>
+              <%= render "components/stall", stall: stall %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
