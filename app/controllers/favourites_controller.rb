@@ -24,7 +24,7 @@ class FavouritesController < ApplicationController
   def destroy
     if can? :destroy, @favourite
       if @favourite.destroy
-        flash[:alert] = ["Sorry to see you go!","Let us know if there's anything we can do beter."]
+        flash[:alert] = ["Sorry to see you go!","Let us know if there's anything we can do better."]
       else
         flash[:error] = 'Sorry, something went wrong.'
       end  
