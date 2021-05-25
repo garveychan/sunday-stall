@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  def create
-    welcome_email
-  end
+  after_action :welcome_email, only: %i[create]
 
+  def create
+  end
+  
   private
 
   def welcome_email

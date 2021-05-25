@@ -59,8 +59,8 @@ User
   -- Logged in -> not favourited? -> favourite
   -- Logged in -> favourited? -> unfavourite
 
-- Profile (Edit User)
-  - Edit Profile | users/edit, devise/registrations#edit
+--   Profile (Edit User)
+  -- Edit Profile | users/edit, devise/registrations#edit
 
 Admin
 -- Dashboard | /admin, RailsAdmin::Engine
