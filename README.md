@@ -19,6 +19,8 @@
 
 I believe that the long tail market for local value-added goods is underserved - e.g. hobbyist bakers, artisans, creators.
 
+Not large or consistent enough to justify having the manage and curate their own presence across multiple platforms. - Shopify, Instagram, Facebook.
+
 ### Why is it a Problem that needs solving? (R8)
 
 - Fragmented market with uncoordinated micro to medium-sized merchants.
@@ -87,6 +89,25 @@ Admin
 ##### Project Management (R20)
 
 ##### User Stories (R12)
+
+As a user,
+I want to be able to sign up with an account so that I can manage my presence on the website.
+
+As a seller,
+I want to set up my stall so that other users can see my brand and what I'm offering.
+I want to add products to my stall with details so that buyers can see what's available for purchase.
+I want to be able to edit and delete my stall so that I can manage my presence on the website.
+I want to be able to edit and delete my products so I change what's available to my buyers.
+
+As a buyer,
+I want to view all stalls and products on the platform so that I can see the full range.
+I want to search for stalls with keywords so that I can quickly find one that suits my needs.
+I want to add my favourite stalls and products to a wish-list so that I can come back to them in the future.
+
+As an administrator,
+I want to have full access so that I can manage all listings on the platform.
+I want to be able to view website statistics at a glance so I can make informed decisions about design.
+I want to interrogate the database so that I can make adjustments if necessary.
 
 ##### Wireframes (R13)
 
