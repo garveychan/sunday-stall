@@ -61,14 +61,14 @@
             Delete Stall
           </button>
         <% else %>
-            <% if @favourited %>
-              <%= button_to "", delete_favourite_stall_path, method: :delete, class: "inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-  
-            <% else %>
+          <% if @favourited %>
+            <%= button_to "", delete_favourite_stall_path, method: :delete, class: "inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+
+          <% else %>
           <button type="button" class="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <i class="far fa-heart"></i>
-          </button>
-            <% end %>
+            </button>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -79,6 +79,12 @@
     </div>
   </div>
 </section>
+<div class="max-w-7xl mx-auto my-12 sm:px-6 lg:px-8">
+  <button type="button" class="inline-flex items-center px-3 py-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+    <%= mail_to current_user.email, "Contact" %>
+    <i class="pl-1 fas fa-paper-plane"></i>
+  </button>
+</div>
 </main>
 <%# Delete Confirmation Modal %>
 <div id="delete-modal" class="modal fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
