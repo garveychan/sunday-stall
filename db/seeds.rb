@@ -10,7 +10,18 @@ Dir.glob(Rails.root.join('storage', '**', '*').to_s).sort_by(&:length).reverse.e
 end
 
 # Drop tables, their dependents and restart their sequences
-%w[users stalls product_categories keywords keywords_stalls].each do |table|
+TABLES = [
+  'users',
+  'stalls',
+  'products',
+  'product_categories',
+  'keywords',
+  'keywords_stalls',
+  'favourites',
+  'reviews'
+]
+
+TABLES.each do |table|
   ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table} RESTART IDENTITY CASCADE;")
 end
 
