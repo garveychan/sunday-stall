@@ -1,12 +1,6 @@
 class ProductsController < ApplicationController
-  load_resource :stall, only: %i[show new create]
+  load_resource :stall, only: %i[new create show edit delete]
   load_resource through: :stall, only: %i[show edit delete]
-
-  def index
-  end
-
-  def show
-  end
 
   def new
     @product = Product.new
@@ -35,10 +29,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def index
+  end
+
+  def show
+  end
+
   def edit
-    raise current_user.inspect
-    @product = Product.find(id: params[:id])
-    @stall = Stall.find(id: params[:stall_id])
     if cannot? :edit, @product
       flash[:error] = "You don't have permission to do that."
       redirect_to stall_product_path(@stall, @product)

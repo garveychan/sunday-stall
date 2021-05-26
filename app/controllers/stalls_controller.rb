@@ -3,17 +3,6 @@ class StallsController < ApplicationController
   before_action :check_user_stall, only: %i[new create]
   skip_before_action :authenticate_user!, only: %i[index show search]
 
-  # Eager loading to prevent N+1 database queries when rendering cards on stalls index page.
-  # Note this eager loads image blobs via the image_attachment association with the Stall model.
-  def index
-    @stalls = Stall.includes([image_attachment: :blob]).all
-  end
-
-  # Render standard show response
-  def show
-    @favourited = true if check_favourite(:stalls).include? @stall
-  end
-
   # Create an empty Stall object and assign it to the instance variable so the creation form can be generated.
   # Build Keywords association in preparation for the form as well.
   def new
@@ -53,6 +42,17 @@ class StallsController < ApplicationController
         format.html { redirect_to new_stall_path }
       end
     end
+  end
+
+  # Eager loading to prevent N+1 database queries when rendering cards on stalls index page.
+  # Note this eager loads image blobs via the image_attachment association with the Stall model.
+  def index
+    @stalls = Stall.includes([image_attachment: :blob]).all
+  end
+
+  # Render standard show response
+  def show
+    @favourited = true if check_favourite(:stalls).include? @stall
   end
 
   # Check that the User is authorised to access the edit form with CanCanCan policy - see ability.rb for more information.
