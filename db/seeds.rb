@@ -83,7 +83,7 @@ product_details = [
   [["Fruity Cocktail", "A surprise flavour every time.", 1], ["Fancy Spirits", "Who knows what we'll send you?", 1]],
   [["Sliced Bread", "Who likes slicing their own bread?", 1], ["Baked Bread", "Crisp and Golden - Eat within the hour.", 1]],
   [["Tofu Laksa", "Spicy and Hot! Will keep you warm on any Winter night.", 1], ["Seared Salmon", "Protein, healthy fats, greens. You can't go wrong!", 1]],
-  [["Succulents", "We'll send you a random succulent with a pretty pot from our partners at Ceramix", 4], ["Terrariums", "Handmade works of art - bring life to your side table.", 4]],
+  [["Succulents", "We'll send you a random succulent with a pretty pot from our partners at Ceramix.", 4], ["Terrariums", "Handmade works of art - bring life to your side table.", 4]],
   [["Random Record", "An authentic vinyl record from the last century, it will impress anyone.", 6], ["Vinyl Player", "For the enthusiasts who need proper gear - this is the real deal.", 6]],
   [["White Bowl with Character", "Every single one is handmade and unique - perfect for your next dinner party.", 3], ["Handcrafted Mug", "That cute barista is going to be so impressed.", 3]]
 ]
