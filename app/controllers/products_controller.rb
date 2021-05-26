@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
-  load_resource :stall, only: %i[new create show edit delete]
-  load_resource through: :stall, only: %i[show edit delete]
+  load_resource :stall, only: %i[new create show edit update destroy]
+  load_resource through: :stall, only: %i[show edit update destroy]
+  before_action :set_product_categories, only: %i[new edit]
 
   def new
     @product = Product.new
-    @product_categories = ProductCategory.all.map { |p| [p.name, p.id] }
   end
 
   def create
@@ -29,9 +29,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def index
-  end
-
   def show
   end
 
@@ -43,9 +40,27 @@ class ProductsController < ApplicationController
   end
 
   def update
+    if can? :update, @product
+      respond_to do |format|
+        if @product.update(product_params)
+          if product_params[:image]
+            @product.image.purge
+            @product.image.attach(product_params[:image])
+          end
+          flash[:success] = 'Your changes have been made!'
+          format.html { redirect_to stall_product_path(@stall, @product) }
+        else
+          flash[:error] = @stall.errors.full_messages
+          format.html { redirect_to edit_stall_product_path }
+        end
+      end
+    else
+      flash[:error] = "You don't have permission to do that."
+      redirect_to stall_product_path(@stall, @product) 
+    end
   end
 
-  def delete
+  def destroy
   end
 
   private
@@ -53,5 +68,9 @@ class ProductsController < ApplicationController
   # This only allows specific parameters to be accepted from the browser request.
   def product_params
     params.require(:product).permit(:name, :description, :product_category_id, :unit_price, :stock_level, :image)
+  end
+
+  def set_product_categories
+    @product_categories = ProductCategory.all.map { |p| [p.name, p.id] }
   end
 end
