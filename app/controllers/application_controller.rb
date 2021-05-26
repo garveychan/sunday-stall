@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-
   #########################################################
   # Fetching Polymorphic Favourites (Stalls and Products)
   #########################################################
@@ -28,7 +27,6 @@ class ApplicationController < ActionController::Base
   def check_favourite(model)
     Favourite.includes([:favouriteable]).send(model).for_user(current_user).map(&:favouriteable)
   end
-  #########################################################
 
   # Redirect to stalls#search action if search parameters detected.
   # Search parameters are passed as a flash for stalls#search to process.

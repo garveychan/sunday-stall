@@ -28,9 +28,10 @@
       <% else %>
         <%= link_to "Create Stall", new_stall_path, class: "mx-2 hover:text-gray-900" %>
       <% end %>
+        <%= link_to "All Stalls", stalls_path, class:"mx-2 hover:text-gray-900" %>
         <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
       <% if current_user %>
-        <%= link_to "Favourites", favourites_path, class:"mx-2 hover:text-gray-900" %>
+        <%= link_to "Favourites", favourites_stalls_path, class:"mx-2 hover:text-gray-900" %>
         <%= link_to "Profile", edit_user_registration_path, class: "mx-2 hover:text-gray-900" %>
         <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
         <p class="mx-2"><%= current_user.first_name %></p>

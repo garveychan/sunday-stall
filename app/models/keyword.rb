@@ -6,5 +6,6 @@
 #  term :string(50)       not null
 #
 class Keyword < ApplicationRecord
-  has_and_belongs_to_many :stalls, touch: true
+  # Associations
+  has_and_belongs_to_many :stalls, touch: true # touch - associated record's updated time is changed when keyword is change.
 end

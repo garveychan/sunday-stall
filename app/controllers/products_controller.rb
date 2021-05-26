@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
-  load_resource :stall, only: %i[new create show edit update destroy]
-  load_resource through: :stall, only: %i[show edit update destroy]
+  load_resource :stall
+  load_resource through: :stall, except: %i[new create]
   before_action :set_product_categories, only: %i[new edit]
+  skip_before_action :authenticate_user!, only: %i[show]
 
   def new
     @product = Product.new
@@ -11,7 +12,8 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     # Assign stall to new product and set its status to active by default.
-    @product[:stall_id], @product[:active] = params[:stall_id], true
+    @product[:stall_id] = params[:stall_id]
+    @product[:active] = true
 
     # Redirect browser to new product if successful.
     # Send user back to form if issue has occurred - likely a Model validation failing.
@@ -56,14 +58,14 @@ class ProductsController < ApplicationController
       end
     else
       flash[:error] = "You don't have permission to do that."
-      redirect_to stall_product_path(@stall, @product) 
+      redirect_to stall_product_path(@stall, @product)
     end
   end
 
-  def destroy
-  end
+  def destroy; end
 
   private
+
   # Leverage 'strong parameters' to defend against malicious attacks.
   # This only allows specific parameters to be accepted from the browser request.
   def product_params
