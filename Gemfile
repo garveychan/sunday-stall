@@ -33,6 +33,7 @@ gem 'active_storage_validations'
 
 ## Styling
 gem "view_component", require: "view_component/engine"
+gem "mini_magick"
 
 ## Authentication/Authorisation
 gem 'devise'

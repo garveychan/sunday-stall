@@ -47,9 +47,10 @@ Buyer
 
 Seller
 -- Create Stall | stalls/new, stalls#create
-- Create Product | stalls/id/products/new, products#create
+-- Create Product | stalls/id/products/new, products#create
 -- Edit Stall | stalls/id/edit, stalls#edit
-- Edit Product | stalls/id/products/id/edit, products#edit
+-- Edit Product | stalls/id/products/id/edit, products#edit
+- Toggle Stall/Product status
 
 User
 -- Authentication
