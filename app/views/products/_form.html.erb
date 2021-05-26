@@ -1,0 +1,91 @@
+<%= form_with model: [stall, product] do |form| %>
+  <div class="h-auto flex pt-10 pb-24 bg-white px-4 overflow-hidden sm:px-6 lg:px-8">
+    <div class="max-w-xl mx-auto space-y-4">
+      <div class="mx-auto h-6 w-auto flex justify-center">
+        <%= render "components/stand" %>
+      </div>
+      <div class="text-center">
+        <h2>
+          <% if current_page? new_stall_product_path %>
+            <span class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Add a new product to your </span>
+            <span class="text-3xl font-extrabold tracking-tight text-indigo-600 sm:text-4xl">SundayStall </span>
+            <span class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">today!</span>
+          <% else %>
+            <span class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Update your </span>
+            <span class="text-3xl font-extrabold tracking-tight text-indigo-600 sm:text-4xl">SundayStall</span>
+            <span class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">product!</span>
+          <% end %>
+          <p class="mt-4 text-lg leading-6 text-gray-500">
+            The information provided below will be added to your product.
+          </p>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :name, "What should we name your product?", class: "block text-center text-sm font-medium text-gray-700" %>
+          <div class="mt-1">
+            <%= form.text_field :name, autofocus: true, maxlength: 50, class:"shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-200", placeholder: "Pepperoni Pizza"%>
+          </div>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :description, "Tell us more about it?", class: "block text-center text-sm font-medium text-gray-700" %>
+          <div class="mt-1">
+            <%= form.text_area :description, rows:3, maxlength: 1000, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-200", placeholder: "The most decadent pepperoni pizza you'll ever try! You'll be back for more." %>
+          </div>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :product_category_id, "What type of product is it?", class: "block text-sm text-center font-medium text-gray-700" %>
+          <div class="mt-1">
+            <%= form.select :product_category_id, options_for_select(product_categories), {}, class:"shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-200" %>
+          </div>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :unit_price, "How much do you want to sell each unit for?", class: "block text-sm text-center font-medium text-gray-700" %>
+          <div class="mt-1">
+            <%= form.number_field :unit_price, value: product.unit_price ? '%.2f' % product.unit_price : nil, min: 0, step: 0.01, class:"shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-200", placeholder: "13.50"%>
+          </div>
+          <p class="mt-2 text-sm text-center text-gray-500"></p>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :stock_level, "How much stock do you have?", class: "block text-sm text-center font-medium text-gray-700" %>
+          <div class="mt-1">
+            <%= form.number_field :stock_level, min: 0, class:"shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md placeholder-gray-200", placeholder: "25" %>
+          </div>
+          <p class="mt-2 text-sm text-center text-gray-500">Note - this will not be shown.</p>
+        </div>
+        <div class="sm:col-span-6">
+          <%= form.label :image, "Upload a photo of your product!", class: "block text-sm text-center font-medium text-gray-700" %>
+          <div class="mt-1">
+            <label class="w-full flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-sm tracking-wide uppercase border-2 border-gray-300 cursor-pointer hover:ring-indigo-500 hover:border-indigo-500 hover:text-indigo-500 hover:font-medium">
+              <img id="uploadPreview" class="w-96 h-64 my-5 hidden"/>
+              <i class="fal fa-cloud-upload"></i>
+              <span class="mt-2 text-base leading-normal">Select a File (less than 10MB)</span>
+              <%= form.file_field :image, class: "hidden", onchange: "PreviewImage()" %>
+              <script type="text/javascript">
+                function PreviewImage() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("product_image").files[0]);
+                
+                oFReader.onload = function (oFREvent) {
+                document.getElementById("uploadPreview").src = oFREvent.target.result;
+                document.getElementById("uploadPreview").style.display = 'block';
+                };
+                };
+              </script>
+            </label>
+          </div>
+          <p class="mt-2 text-sm text-center text-gray-500">Make sure the lighting is perfect (;</p>
+        </div>
+        <div class="pt-5">
+          <div class="flex justify-center">
+            <% if current_page? new_stall_product_path %>
+              <%= link_to "Cancel", stall_path(stall.id), class: "cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+              <%= form.submit "Add Product", class: "cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+            <% else %>
+              <%= link_to "Cancel", stall_path(stall.id), class: "cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+              <%= form.submit "Save Changes", class: "cursor-pointer ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

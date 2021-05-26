@@ -5,7 +5,7 @@
 #  id                  :bigint           not null, primary key
 #  active              :boolean          not null
 #  description         :text             not null
-#  name                :string(5)        not null
+#  name                :string(50)       not null
 #  stock_level         :integer          not null
 #  unit_price          :integer          not null
 #  created_at          :datetime         not null
@@ -24,11 +24,21 @@
 #  fk_rails_...  (stall_id => stalls.id)
 #
 class Product < ApplicationRecord
+  # Associations
   belongs_to :stall
   belongs_to :product_category
-
   has_many :reviews
   has_many :users, through: :reviews
-  has_many_attached :images # blobs automatically purged if product deleted
+  has_one_attached :image # blobs automatically purged if product deleted
   has_many :favourites, as: :favouriteable, dependent: :destroy
+
+  # Validations
+  validates :active, presence: true
+  validates :description, presence: true, length: { maximum: 1000 }
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :stock_level, presence: true
+  validates :unit_price, presence: true
+  validates :product_category_id, presence: true
+  validates :stall_id, presence: true
+  validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
 end

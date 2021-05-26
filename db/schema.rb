@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_124552) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name", limit: 5, null: false
+    t.string "name", limit: 50, null: false
     t.text "description", null: false
     t.integer "unit_price", null: false
     t.integer "stock_level", null: false
@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 2021_05_25_124552) do
   end
 
   create_table "stalls", force: :cascade do |t|
-    t.string "title", limit: 50
-    t.string "subtitle", limit: 100
-    t.text "description"
+    t.string "title", limit: 50, null: false
+    t.string "subtitle", limit: 100, null: false
+    t.text "description", null: false
     t.boolean "active", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

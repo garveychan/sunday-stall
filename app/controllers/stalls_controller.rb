@@ -30,6 +30,7 @@ class StallsController < ApplicationController
   # The << action helps generate the HABTM join table entry to connect the stall with the keyword.
   def create
     @stall = Stall.new(stall_params.except(:keywords_attributes))
+    
     params.dig(:stall,:keywords_attributes,"0",:term).gsub(',',' ').split.each do |k|
       term = Keyword.find_or_create_by({term: k.downcase})
       @stall.keywords << term

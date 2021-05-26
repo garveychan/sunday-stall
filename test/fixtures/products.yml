@@ -5,7 +5,7 @@
 #  id                  :bigint           not null, primary key
 #  active              :boolean          not null
 #  description         :text             not null
-#  name                :string(5)        not null
+#  name                :string(50)       not null
 #  stock_level         :integer          not null
 #  unit_price          :integer          not null
 #  created_at          :datetime         not null

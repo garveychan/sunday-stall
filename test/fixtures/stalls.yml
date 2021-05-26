@@ -4,9 +4,9 @@
 #
 #  id          :bigint           not null, primary key
 #  active      :boolean          not null
-#  description :text
-#  subtitle    :string(100)
-#  title       :string(50)
+#  description :text             not null
+#  subtitle    :string(100)      not null
+#  title       :string(50)       not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint           not null

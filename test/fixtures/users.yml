@@ -30,7 +30,6 @@ one:
   date_of_birth: 2021-05-21
   email_address: MyString
   phone_number: MyString
-  address: one
 
 two:
   id: 
@@ -39,4 +38,3 @@ two:
   date_of_birth: 2021-05-21
   email_address: MyString
   phone_number: MyString
-  address: two
