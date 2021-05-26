@@ -41,4 +41,9 @@ class Product < ApplicationRecord
   validates :product_category_id, presence: true
   validates :stall_id, presence: true
   validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
+
+  # Scope Extensions
+  scope :favourites, ->(user) { joins(:favourites)
+                                .where(favourites: { user_id: user.id })
+                                .includes(:stall, image_attachment: :blob) }
 end

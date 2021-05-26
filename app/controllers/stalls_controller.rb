@@ -50,9 +50,11 @@ class StallsController < ApplicationController
     @stalls = Stall.includes([image_attachment: :blob]).all
   end
 
-  # Render standard show response
+  # Apply application controller helper method to check if stall has been favourited by user.
+  # Send this stall's products to the view.
   def show
     @favourited = true if check_favourite(:stalls).include? @stall
+    @products = @stall.products.includes([image_attachment: :blob])
   end
 
   # Check that the User is authorised to access the edit form with CanCanCan policy - see ability.rb for more information.

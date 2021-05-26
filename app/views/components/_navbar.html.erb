@@ -30,13 +30,13 @@
       <% end %>
         <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
         <%= link_to "All Stalls", stalls_path, class:"mx-2 hover:text-gray-900" %>
-        <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
       <% if current_user %>
+        <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
         <%= link_to "Favourites", favourites_stalls_path, class:"mx-2 hover:text-gray-900" %>
         <%= link_to "Profile", edit_user_registration_path, class: "mx-2 hover:text-gray-900" %>
-        <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
-        <p class="mx-2"><%= current_user.first_name %></p>
+        <p class="mx-2 text-indigo-500"><%= current_user.first_name %></p>
       <% end %>
+        <i class="mx-1 fal fa-horizontal-rule fa-rotate-90"></i>
     </nav>
 
     <button class="mx-2 inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 text-white bg-indigo-600 hover:bg-indigo-700">

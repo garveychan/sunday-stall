@@ -32,6 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @favourited = true if check_favourite(:products).include? @product
   end
 
   def edit
@@ -62,7 +63,22 @@ class ProductsController < ApplicationController
     end
   end
 
-  def destroy; end
+  # Ensure User has permission to destroy the Stall record.
+  # Attempt to destroy the record and redirect to stall page if successful.
+  # The destroy method will delete any associations with the product e.g. usre favourites. 
+  def destroy
+    if can? :destroy, @product
+      if @product.destroy
+        respond_to do |format|
+          flash[:alert] = ['Your product has been deleted.','Hope you add some more soon!']
+          format.html { redirect_to @stall }
+        end
+      end
+    else
+      flash[:error] = "You don't have permission to do that."
+      redirect_to @stall
+    end
+  end
 
   private
 

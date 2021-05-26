@@ -42,4 +42,9 @@ class Stall < ApplicationRecord
   # This reduces dependencies, enabling code reuse and easier maintainability.
   # e.g. View will call stall.user_email instead of stall.user.email
   delegate :email, to: :user, prefix: true
+
+  # Scope Extensions
+  scope :favourites, ->(user) { joins(:favourites)
+                                .where(favourites: {user_id: user.id})
+                                .includes(image_attachment: :blob) }
 end

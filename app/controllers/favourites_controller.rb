@@ -2,8 +2,8 @@ class FavouritesController < ApplicationController
   before_action :set_favourite, only: %i[create destroy]
 
   def index
-    @favourite_stalls = get_favourite(:stalls)
-    @favourite_products = get_favourite(:products)
+    @favourite_stalls = Stall.favourites(current_user)
+    @favourite_products = Product.favourites(current_user)
     if (@favourite_stalls + @favourite_products).empty?
       @stalls = Stall.includes([image_attachment: :blob]).all
       render :none
@@ -20,34 +20,51 @@ class FavouritesController < ApplicationController
     else
       flash[:error] = "You don't have permission to do that."
     end
-    redirect_to stall_path
+    redirect
   end
 
   def destroy
     if can? :destroy, @favourite
       if @favourite.destroy
-        flash[:alert] = ['Sorry to see you go!', "Let us know if there's anything we can do better."]
+        flash[:alert] = ['Sorry to see you go!',
+                         "Let us know if there's anything we can do better."]
       else
         flash[:error] = 'Sorry, something went wrong.'
       end
     else
         flash[:error] = "You don't have permission to do that."
     end
-    redirect_to stall_path
+    redirect
   end
 
   private
-
-  def set_stall
-    @stall ||= Stall.find_by(id: params[:id])
+  def product_page?
+    params[:stall_id]
   end
 
-  def set_favourite
-    set_stall
-    if check_favourite(:stalls).include? @stall
-      @favourite = Favourite.stalls.for_user(current_user).for_object(@stall).first
+  def redirect
+    product_page? ? (redirect_to stall_product_path) : (redirect_to stall_path)
+  end
+
+  # Set the current stall using the stall id parameter
+  def set_favouriteable
+    if product_page?
+      @favouriteable ||= Product.find_by(id: params[:id])
+      @type = :products
     else
-      @favourite = Favourite.new(favouriteable: @stall, user_id: current_user.id)
+      @favouriteable ||= Stall.find_by(id: params[:id])
+      @type = :stalls
+    end
+  end
+
+  # Hook before action to check if stall or product has been favourited.
+  # If not, initialize a blank object for the current user and set constant type with the correct format.
+  def set_favourite
+    set_favouriteable
+    if check_favourite(@type).include? @favouriteable
+      @favourite = Favourite.send(@type).for_user(current_user).for_object(@favouriteable).first
+    else
+      @favourite = Favourite.new(favouriteable: @favouriteable, user_id: current_user.id)
       @favourite[:favouriteable_type] = @favourite[:favouriteable_type].camelize
     end
   end

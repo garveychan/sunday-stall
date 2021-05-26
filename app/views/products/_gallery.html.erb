@@ -1,9 +1,7 @@
-<div class="mx-auto my-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:my-12">
-  <div class="space-y-12">
-    <ul class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-      <% products.each do |product| %>
-        <%= render "components/product", product: product %>
-      <% end %>
-    </ul>
+<div class="container px-5 my-12 mx-auto">
+  <div class="flex flex-wrap -m-4">
+    <% products.each do |product| %>
+      <%= render "components/product", product: product %>
+    <% end %>
   </div>
 </div>
