@@ -121,6 +121,10 @@ I want to interrogate the database so that I can make adjustments if necessary.
 ##### Rails Models (R17)
 `belongs_to/has_many associations`
 
+  # By the Law of Demeter, models should only talk to their immediate associations.
+  # This reduces dependencies, enabling code reuse and easier maintainability.
+  # e.g. View will call stall.user_email instead of stall.user.email
+
 ##### Database Relationships (R18)
 `primary/foreign key associations`
 

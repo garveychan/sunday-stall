@@ -24,7 +24,7 @@
 
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <% if current_user && current_user.stall %>
-        <%= link_to "My Stall", stall_path(id: current_user.stall.id), class: "mx-2 hover:text-gray-900" %>
+        <%= link_to "My Stall", stall_path(id: current_user.stall_id), class: "mx-2 hover:text-gray-900" %>
       <% else %>
         <%= link_to "Create Stall", new_stall_path, class: "mx-2 hover:text-gray-900" %>
       <% end %>

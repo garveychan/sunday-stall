@@ -26,7 +26,7 @@ class Stall < ApplicationRecord
   has_many :favourites, as: :favouriteable, dependent: :destroy # Destroy any favourite associations with users.
   has_many :products, dependent: :destroy # Destroy products associated with stall as well.
   has_and_belongs_to_many :keywords # Stall may have many keywords assigned to it. On delete, the keywords will remain but the join table records will be destroyed.
-  accepts_nested_attributes_for :keywords, reject_if: lambda {|attributes| attributes['term'].blank?} # Accepts keywords via Stall-based forms for persisting.
+  accepts_nested_attributes_for :keywords, reject_if: ->(attributes) { attributes['term'].blank? } # Accepts keywords via Stall-based forms for persisting.
 
   # Validations
   validates :active, presence: true
@@ -38,13 +38,17 @@ class Stall < ApplicationRecord
   validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
 
   # Delegations
-  # By the Law of Demeter, models should only talk to their immediate associations.
-  # This reduces dependencies, enabling code reuse and easier maintainability.
-  # e.g. View will call stall.user_email instead of stall.user.email
-  delegate :email, to: :user, prefix: true
+  delegate :email, to: :user, prefix: true # Stall.user_email
 
   # Scope Extensions
-  scope :favourites, ->(user) { joins(:favourites)
-                                .where(favourites: {user_id: user.id})
-                                .includes(image_attachment: :blob) }
+  scope :favourites, lambda { |user|
+    includes(image_attachment: :blob)
+      .joins(:favourites)
+      .where(favourites: { user_id: user.id })
+  }
+  scope :search_results, lambda { |keywords|
+    includes(image_attachment: :blob)
+      .joins(:keywords)
+      .where(keywords: { term: keywords.downcase })
+  }
 end

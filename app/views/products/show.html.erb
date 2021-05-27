@@ -43,7 +43,7 @@
               </button>
             <% else %>
               <button type="button" class="block w-full py-1 px-5 text-center bg-green-400 border border-transparent rounded-md shadow-md text-base font-medium text-white hover:bg-green-500 sm:inline-block sm:w-auto">
-                <%= mail_to product.stall.user_email, "Contact" %>
+                <%= mail_to product.stall_user_email, "Contact" %>
                 <i class="pl-1 fas fa-paper-plane"></i>
               </button>
               <% if @favourited %>

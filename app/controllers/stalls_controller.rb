@@ -122,8 +122,7 @@ class StallsController < ApplicationController
   # The has_and_belongs_to_many relationship with the keyword database is leveraged to find relevant stalls.
   # The stalls results page is then rendered.
   def search
-    @results = Stall.includes(image_attachment: :blob).joins(:keywords)
-                   .where( keywords: { term: flash[:search].downcase } )
+    @results = Stall.search_results(flash[:search])
     flash.delete :search
     render 'stalls/results'
   end

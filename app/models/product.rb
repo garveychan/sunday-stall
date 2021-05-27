@@ -43,7 +43,14 @@ class Product < ApplicationRecord
   validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
 
   # Scope Extensions
-  scope :favourites, ->(user) { joins(:favourites)
-                                .where(favourites: { user_id: user.id })
-                                .includes(:stall, image_attachment: :blob) }
+  scope :favourites, lambda { |user|
+    includes(:stall, image_attachment: :blob)
+      .joins(:favourites)
+      .where(favourites: { user_id: user.id })
+  }
+
+  # Delegations
+  delegate :id, to: :stall, prefix: true # Product.stall_id
+  delegate :title, to: :stall, prefix: true # Product.stall_title
+  delegate :user_email, to: :stall, prefix: true # Product.stall_user_email
 end

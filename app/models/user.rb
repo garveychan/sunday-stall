@@ -41,4 +41,7 @@ class User < ApplicationRecord
   validates :first_name, length: { maximum: 50 }
   validates :last_name, length: { maximum: 50 }
   validates :phone_number, length: { maximum: 12 }
+
+  # Delegations
+  delegate :id, to: :stall, prefix: true # User.stall_id
 end
