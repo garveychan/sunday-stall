@@ -2,10 +2,10 @@ class FavouritesController < ApplicationController
   before_action :set_favourite, only: %i[create destroy]
 
   def index
-    @favourite_stalls = Stall.favourites(current_user)
-    @favourite_products = Product.favourites(current_user)
+    @favourite_stalls = Stall.favourites(current_user).with_attached_image
+    @favourite_products = Product.favourites(current_user).with_attached_image
     if (@favourite_stalls + @favourite_products).empty?
-      @stalls = Stall.includes([image_attachment: :blob]).all
+      @stalls = Stall.with_attached_image.all
       render :none
     end
   end

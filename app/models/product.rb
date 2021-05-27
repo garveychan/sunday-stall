@@ -25,7 +25,7 @@
 #
 class Product < ApplicationRecord
   # Associations
-  belongs_to :stall
+  belongs_to :stall, inverse_of: :products
   belongs_to :product_category
   has_many :reviews
   has_many :users, through: :reviews
@@ -44,8 +44,7 @@ class Product < ApplicationRecord
 
   # Scope Extensions
   scope :favourites, lambda { |user|
-    includes(:stall, image_attachment: :blob)
-      .joins(:favourites)
+    joins(:favourites)
       .where(favourites: { user_id: user.id })
   }
 

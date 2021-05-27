@@ -45,16 +45,16 @@ class StallsController < ApplicationController
   end
 
   # Eager loading to prevent N+1 database queries when rendering cards on stalls index page.
-  # Note this eager loads image blobs via the image_attachment association with the Stall model.
+  # Note this eager loads image blobs via the image_attachment association with the Stall model's scope.
   def index
-    @stalls = Stall.includes([image_attachment: :blob]).all
+    @stalls = Stall.with_attached_image.all
   end
 
   # Apply application controller helper method to check if stall has been favourited by user.
   # Send this stall's products to the view.
   def show
     @favourited = true if check_favourite(:stalls).include? @stall
-    @products = @stall.products.includes([image_attachment: :blob])
+    @products = @stall.products.with_attached_image
   end
 
   # Check that the User is authorised to access the edit form with CanCanCan policy - see ability.rb for more information.
@@ -122,7 +122,7 @@ class StallsController < ApplicationController
   # The has_and_belongs_to_many relationship with the keyword database is leveraged to find relevant stalls.
   # The stalls results page is then rendered.
   def search
-    @results = Stall.search_results(flash[:search])
+    @results = Stall.search_results(flash[:search]).with_attached_image
     flash.delete :search
     render 'stalls/results'
   end

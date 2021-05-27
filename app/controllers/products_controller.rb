@@ -9,10 +9,9 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
+    @product = @stall.products.new(product_params)
 
     # Assign stall to new product and set its status to active by default.
-    @product[:stall_id] = params[:stall_id]
     @product[:active] = true
 
     # Redirect browser to new product if successful.

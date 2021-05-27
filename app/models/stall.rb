@@ -24,7 +24,7 @@ class Stall < ApplicationRecord
   belongs_to :user # Stall belongs to one user.
   has_one_attached :image # Blobs automatically purged if stall is destroyed.
   has_many :favourites, as: :favouriteable, dependent: :destroy # Destroy any favourite associations with users.
-  has_many :products, dependent: :destroy # Destroy products associated with stall as well.
+  has_many :products, inverse_of: :stall, dependent: :destroy # Destroy products associated with stall as well.
   has_and_belongs_to_many :keywords # Stall may have many keywords assigned to it. On delete, the keywords will remain but the join table records will be destroyed.
   accepts_nested_attributes_for :keywords, reject_if: ->(attributes) { attributes['term'].blank? } # Accepts keywords via Stall-based forms for persisting.
 
@@ -41,14 +41,14 @@ class Stall < ApplicationRecord
   delegate :email, to: :user, prefix: true # Stall.user_email
 
   # Scope Extensions
+  # Procure favourited stalls based on provided user (typically current_user via Devise)
   scope :favourites, lambda { |user|
-    includes(image_attachment: :blob)
-      .joins(:favourites)
+    joins(:favourites)
       .where(favourites: { user_id: user.id })
   }
+  # Procure search results based on HABTM relationship with keywords from search parameters
   scope :search_results, lambda { |keywords|
-    includes(image_attachment: :blob)
-      .joins(:keywords)
+    joins(:keywords)
       .where(keywords: { term: keywords.downcase })
   }
 end
