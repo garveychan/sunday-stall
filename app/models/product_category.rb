@@ -6,5 +6,6 @@
 #  name :string(50)       not null
 #
 class ProductCategory < ApplicationRecord
+  # Associations
   has_many :products
 end

@@ -1,6 +1,12 @@
 class FavouritesController < ApplicationController
+  # Hook to set relevant favourite record using private method
+  # prior to entering a POST or DELETE action.
   before_action :set_favourite, only: %i[create destroy]
 
+  # Index page for User Favourites
+  # Assign favourite stalls and products using scoped models to instance variables for View to render.
+  # Eager load attached images to prevent querying database for each individual instance.
+  # If favourites don't exist, redirect to specialised no favourites page.
   def index
     @favourite_stalls = Stall.favourites(current_user).with_attached_image
     @favourite_products = Product.favourites(current_user).with_attached_image
@@ -10,6 +16,8 @@ class FavouritesController < ApplicationController
     end
   end
 
+  # POST method to create a Favourite record
+  # Custom error messages routed through JavaScript notification
   def create
     if can? :create, @favourite
       if @favourite.save
@@ -22,7 +30,9 @@ class FavouritesController < ApplicationController
     end
     redirect
   end
-
+  
+  # DELETE method to destroy a Favourite record
+  # Custom error messages routed through JavaScript notification
   def destroy
     if can? :destroy, @favourite
       if @favourite.destroy
@@ -38,10 +48,12 @@ class FavouritesController < ApplicationController
   end
 
   private
+  # Boolean check if User is on a Stall or Product page based on parameters returned
   def product_page?
     params[:stall_id]
   end
 
+  # Redirect based on whether a Stall or Product has just been favourited
   def redirect
     product_page? ? (redirect_to stall_product_path) : (redirect_to stall_path)
   end

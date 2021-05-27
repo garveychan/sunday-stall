@@ -1,9 +1,16 @@
 class ProductsController < ApplicationController
+  # Hooks to load stalls and products through stalls with CanCanCan helper method
+  # Assign product categories to New and Edit forms for rendering in Views
+  # Don't authenticate user for Show action so anyone can view Products
   load_resource :stall
   load_resource through: :stall, except: %i[new create]
   before_action :set_product_categories, only: %i[new edit]
   skip_before_action :authenticate_user!, only: %i[show]
 
+  # Create a new Product instance assigned to the Stall on which the
+  # user has requested to add a product.
+  # Check if they are authorised to add a product to the stall
+  # i.e. do they own it? If not, send them back to the stall.
   def new
     @product = Product.new(stall_id: params[:stall_id])
 
@@ -14,16 +21,16 @@ class ProductsController < ApplicationController
     end
   end
   
+  # Assign stall to new product and set its status to active by default.
+  # Redirect browser to new product if successful.
+  # Send user back to form if issue has occurred - likely a Model validation failing.
+  # This should not occur in most cases as Views have been constructed with validation too.
+  # Each response will send a 'flash' message for the notification component to render.
+  # See notification component for more information.
   def create
-    # Assign stall to new product and set its status to active by default.
     @product = @stall.products.new(product_params)
     @product[:active] = true
     
-    # Redirect browser to new product if successful.
-    # Send user back to form if issue has occurred - likely a Model validation failing.
-    # This should not occur in most cases as Views have been constructed with validation too.
-    # Each response will send a 'flash' message for the notification component to render.
-    # See notification component for more information.
     if can? :create, @product
       respond_to do |format|
         if @product.save
@@ -40,10 +47,13 @@ class ProductsController < ApplicationController
     end 
   end
 
+  # Check if the product has been favourited and pass boolean to View
+  # for visual indicator button.
   def show
     @favourited = true if check_favourite(:products).include? @product
   end
 
+  # Send user back to the product page if they aren't authorised to edit.
   def edit
     if cannot? :edit, @product
       flash[:error] = "You don't have permission to do that."
@@ -51,6 +61,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  # PUT method to update a product instance. If user is authorised,
+  # attempt to update the product with supplied parameters.
+  # If an image has been re-uploaded, purge the existing one and replace it.
+  # Redirect as necessary with custom messages.
   def update
     if can? :update, @product
       respond_to do |format|
@@ -97,6 +111,7 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :product_category_id, :unit_price, :stock_level, :image)
   end
 
+  # Set product categories based on all records from named table.
   def set_product_categories
     @product_categories = ProductCategory.all.map { |p| [p.name, p.id] }
   end

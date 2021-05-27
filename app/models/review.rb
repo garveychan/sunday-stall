@@ -21,9 +21,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Review < ApplicationRecord
+  # Associations
   belongs_to :user
   belongs_to :product
 
+  # Validations
   validates :rating, inclusion: { in: 1..5 }
   validates :rating, numericality: { only_integer: true }
 end

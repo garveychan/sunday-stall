@@ -1,4 +1,7 @@
 class StallsController < ApplicationController
+  # Hooks to load all stalls for required actions.
+  # Check if user already owns a stall when attempting to create new stall.
+  # Don't authenticate user on pages/actions where guests should have read access.
   load_resource only: %i[show edit update destroy]
   before_action :check_user_stall, only: %i[new create]
   skip_before_action :authenticate_user!, only: %i[index show search]

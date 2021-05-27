@@ -43,6 +43,7 @@ class Product < ApplicationRecord
   validates :image, attached: true, size: { less_than: 10.megabytes, message: 'larger than 10MB!' }
 
   # Scope Extensions
+  # Find favourited products based on User instance passed through as argument.
   scope :favourites, lambda { |user|
     joins(:favourites)
       .where(favourites: { user_id: user.id })
