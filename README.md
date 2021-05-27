@@ -236,28 +236,28 @@ Key features/User stories will then be broken down into micro tasks (and bugs) a
 #### User Stories (R12)
 
 As a **user**,
-I want to sign up with an account so that I can interact with others on the website.
-I want to be able to edit or delete my profile so that I can manage my presence on the website.
+- I want to sign up with an account so that I can interact with others on the website.
+- I want to be able to edit or delete my profile so that I can manage my presence on the website.
 
 As a **seller**,
-I want to set up my stall so that other users can see my brand and what I'm offering.
-I want to add photos to my stalls and products to give a visual indication of my goods/services.
-I want to assign keywords to my stall so that users can find my products if they are relevant.
-I want to add products to my stall with details so that buyers can see what's available for purchase.
-I want to be able to edit my stall so that I can cultivate my brand effectively.
-I want to be able to edit my products so I change what's available to my buyers.
-I want to be able to delete my stall and/or products in the event that I no longer wish to transact.
+- I want to set up my stall so that other users can see my brand and what I'm offering.
+- I want to add photos to my stalls and products to give a visual indication of my goods/services.
+- I want to assign keywords to my stall so that users can find my products if they are relevant.
+- I want to add products to my stall with details so that buyers can see what's available for purchase.
+- I want to be able to edit my stall so that I can cultivate my brand effectively.
+- I want to be able to edit my products so I change what's available to my buyers.
+- I want to be able to delete my stall and/or products in the event that I no longer wish to transact.
 
 As a **buyer**,
-I want to view all stalls and products on the platform so that I can see make informed purchase decisions.
-I want to search for stalls with keywords so that I can quickly find one that suits my needs.
-I want to add my favourite stalls and products to a wish-list so that I can come back to them in the future.
+- I want to view all stalls and products on the platform so that I can see make informed purchase decisions.
+- I want to search for stalls with keywords so that I can quickly find one that suits my needs.
+- I want to add my favourite stalls and products to a wish-list so that I can come back to them in the future.
 
 As an **administrator**,
-I want to have full access so that I can manage listings and moderate user behaviour on the platform.
-I want to view website statistics at a glance so I can make informed decisions about design.
-I want to interrogate the database so that I can make adjustments if necessary.
-I want to be able to assign different levels of website access to users so that I can delegate management duties.
+- I want to have full access so that I can manage listings and moderate user behaviour on the platform.
+- I want to view website statistics at a glance so I can make informed decisions about design.
+- I want to interrogate the database so that I can make adjustments if necessary.
+- I want to be able to assign different levels of website access to users so that I can delegate management duties.
 
 #### Wireframes (R13)
 
