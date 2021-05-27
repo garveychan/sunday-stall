@@ -3,12 +3,12 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  date_of_birth          :date
+#  date_of_birth          :date             not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  first_name             :string(50)
-#  last_name              :string(50)
-#  phone_number           :string(12)
+#  first_name             :string(50)       not null
+#  last_name              :string(50)       not null
+#  phone_number           :string(12)       not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -43,5 +43,5 @@ class User < ApplicationRecord
   validates :phone_number, length: { maximum: 12 }
 
   # Delegations
-  delegate :id, to: :stall, prefix: true # User.stall_id
+  delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_id
 end
