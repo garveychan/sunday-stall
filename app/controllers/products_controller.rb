@@ -5,29 +5,39 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
 
   def new
-    @product = Product.new
+    @product = Product.new(stall_id: params[:stall_id])
+
+    if can? :create, @product
+    else
+      flash[:error] = "You don't have permission to do that."
+      redirect_to stall_path(@stall)
+    end
   end
-
+  
   def create
-    @product = @stall.products.new(product_params)
-
     # Assign stall to new product and set its status to active by default.
+    @product = @stall.products.new(product_params)
     @product[:active] = true
-
+    
     # Redirect browser to new product if successful.
     # Send user back to form if issue has occurred - likely a Model validation failing.
     # This should not occur in most cases as Views have been constructed with validation too.
     # Each response will send a 'flash' message for the notification component to render.
     # See notification component for more information.
-    respond_to do |format|
-      if @product.save
-        flash[:success] = 'Your product was created successfully!'
-        format.html { redirect_to stall_product_path(@stall, @product) }
-      else
-        flash[:error] = @product.errors.full_messages
-        format.html { redirect_to new_stall_product_path }
+    if can? :create, @product
+      respond_to do |format|
+        if @product.save
+          flash[:success] = 'Your product was created successfully!'
+          format.html { redirect_to stall_product_path(@stall, @product) }
+        else
+          flash[:error] = @product.errors.full_messages
+          format.html { redirect_to new_stall_product_path }
+        end
       end
-    end
+    else
+      flash[:error] = "You don't have permission to do that."
+      redirect_to stall_path(@stall)
+    end 
   end
 
   def show

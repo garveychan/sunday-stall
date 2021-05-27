@@ -16,7 +16,7 @@ class Ability
     # Set limitations on actions a user can perform.
     if user.present?
       can %i[edit update destroy], Stall, user_id: user.id
-      can %i[create edit update destroy], Product, stall_id: user.stall&.id
+      can %i[create edit update destroy], Product, stall_id: user.stall_id
       can %i[create destroy], Favourite, user_id: user.id
     end
   end
