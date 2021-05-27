@@ -176,18 +176,18 @@ As this is a solo project, I must adhere to three of **Agile's core tenants**:
 
 - **Short Development Cycles**
 
-  - By breaking high level features down into their constituent **user stories**, I can begin to focus on small sections of the application at a time. This is fundamental to the Agile approach as it will allow me to **monitor my progress effectively** and allow me to make more **accurate time estimates** for tasks in the backlog, not to mention the added benefit of making the overall task less taunting.
+  - By breaking high level features down into their constituent **user stories**, I can begin to focus on small sections of the application at a time. This is fundamental to the Agile approach as it will allow me to **monitor my progress effectively** and to make more **accurate time estimates** for tasks in the backlog, not to mention the added benefit of making the overall task less daunting.
 
 - **Embracing Change**
 
   - As **bugs** and more pressing **issues** inevitably make themselves known, I will have to either water down some **functions**, make compromises with other **features**, or swap out **planned tasks** for less time consuming ones. It is important that I lean into this and build on **user story by user story** so that I don't misallocate my time and end up with a half-baked product with defects and, more worryingly, **security vulnerabilities**.
 
 - **Reflection**
-  - I must take time to reflect after each **user story** on both the work that I have completed as well as the **process** by which I completed it. This will help me identify ways to increase my productivity by making the right trade-offs and small-scale investments which might bear fruit later in the project - e.g. reconfiguring my VSCode extensions and installing development gems to assist with identifying issues, testing, scripting.
+  - I must take time to reflect after each **user story**, on both the work that I have completed as well as the **process** by which I completed it. This will help me identify ways to increase my productivity by making the right trade-offs and small-scale investments which might bear fruit later in the project - e.g. reconfiguring my VSCode extensions and installing development gems to assist with identifying issues, testing, scripting.
 
 **Prioritisation**
 
-In applying the Agile approach, I have prioritised by proposed features using the framework provided by the educators at Coder, splitting components into three categories:
+In applying the Agile approach, I have prioritised my proposed features using the framework provided by the educators at Coder, splitting components into three categories:
 
 - **Essential (Minimum Viable Product)**
 
