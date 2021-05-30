@@ -32,7 +32,7 @@ This has left a **fragmented** long-tail market of irregular merchants who have 
 
 It should be noted that there is typically only one marketplace which gains a monopoly in its business vertical due to a phenomenon called 'network effects'. In effect, the more buyers there are on the platform, the more sellers will be attracted to it, and vice versa - helping to build a defensive moat that makes it very difficult for competing marketplaces to gain traction.
 
-In order to compete against these marketplaces, one would have to provide a 10x better product or product experience to convince users to switch over, lower their take rate, or offer **unique inventory** (Tran, Webster and Wertz, 2021) - the latter of which this application hopes to achieve.
+In order to compete against these marketplaces, one would have to provide a 10x better product or product experience, lower their take rate, or offer **unique inventory** to convince users to switch over (Tran, Webster and Wertz, 2021) - the latter of which this application hopes to achieve.
 
 In summary -
 
@@ -284,7 +284,7 @@ As it stands, there are 5 distinct sections of the database, colour-coded to rep
 
 - **Users**
   - The `users` table contains basic personal information related to each user, their login credentials (encrypted) and their role in the system.
-  - An enumerator has been defined to specify the roles to which any user can be assigned.
+  - An enumerated type has been defined to specify the roles to which any user can be assigned.
   - A user can have **one and only one** `stall`. This is in contrast to simply having **one** `stall` because a stall cannot belong to any other user. Only the user to which it was originally assigned.
   - A user can also have **zero or many** `favourites`, so that they are free to either not use the feature at all or 'favourite' every item to their heart's content.
 
