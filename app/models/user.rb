@@ -38,10 +38,20 @@ class User < ApplicationRecord
   # Validations
   validates :email, presence: true
   validates :encrypted_password, presence: true
-  validates :first_name, length: { maximum: 50 }
-  validates :last_name, length: { maximum: 50 }
-  validates :phone_number, length: { maximum: 12 }
+  validates :first_name, presence: true, length: { maximum: 50 }
+  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :phone_number, presence: true, length: { maximum: 12 }
+  validates :date_of_birth, presence: true
+  validate :date_of_birth_cannot_be_after_today
 
   # Delegations
-  delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_id
+  delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_ido
+
+  private
+
+  def date_of_birth_cannot_be_after_today
+    if date_of_birth.present? && date_of_birth > Date.today
+      errors.add(:date_of_birth, " can't be in the future")
+    end
+  end
 end
