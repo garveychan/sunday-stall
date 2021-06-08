@@ -43,6 +43,7 @@ class User < ApplicationRecord
   validates :phone_number, presence: true, length: { maximum: 12 }
   validates :date_of_birth, presence: true
   validate :date_of_birth_cannot_be_after_today
+  validate :valid_phone_number
 
   # Delegations
   delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_id
@@ -53,5 +54,9 @@ class User < ApplicationRecord
     if date_of_birth.present? && date_of_birth > Date.today
       errors.add(:date_of_birth, " can't be in the future")
     end
+  end
+
+  def valid_phone_number
+    errors.add(:phone_number, " must be valid") unless /\A[+]?[\d]+\z/ === phone_number
   end
 end
