@@ -45,7 +45,7 @@ class User < ApplicationRecord
   validate :date_of_birth_cannot_be_after_today
 
   # Delegations
-  delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_ido
+  delegate :id, to: :stall, prefix: true, allow_nil: true # User.stall_id
 
   private
 
