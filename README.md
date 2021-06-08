@@ -88,10 +88,6 @@ Future iterations will have:
 
 ![Screenshot 2](./docs/site_2.png)
 
-##### Landing Page - Featured Products
-
-![Screenshot 3](./docs/site_3.png)
-
 ##### Search Results
 
 ![Screenshot 4](./docs/site_4.png)
