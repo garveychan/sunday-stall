@@ -14,7 +14,7 @@
 
 [SundayStall](https://sundaystall.herokuapp.com)
 
-[GitHub](https://github.com/garveychan/ca-t2a2-marketplace) / [Trello](https://trello.com/b/NpLIB3x5/t2a2-marketplace-project)
+[GitHub](https://github.com/garveychan/sunday-stall) / [Trello](https://trello.com/b/NpLIB3x5/t2a2-marketplace-project)
 
 ### The Market Problem (R7)
 
