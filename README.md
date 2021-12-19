@@ -44,7 +44,7 @@ In summary -
 
 #### Purpose
 
-The purpose of this application is to provide a platform on which small businesses can cultivate an online presence with an intuitive interface and value-added workflow that doesn't carry the friction of having to multi-tenant across marketplaces and social media channels.
+The purpose of this application is to provide a platform on which small businesses can build an online presence using an intuitive interface and a frictionless workflow that offsets the effort of having to multi-tenant across marketplaces and social media channels.
 
 It is intended to aggregate a smaller number of **high-quality** merchants and provide them the tools to effectively cultivate their micro-brands.
 
