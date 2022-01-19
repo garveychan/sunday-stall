@@ -1,6 +1,18 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  mailgun = Rails.application.credentials.mailgun
+  ActionMailer::Base.smtp_settings = {
+    port: mailgun[:MAILGUN_SMTP_PORT],
+    address: mailgun[:MAILGUN_SMTP_SERVER],
+    user_name: mailgun[:MAILGUN_SMTP_LOGIN],
+    password: mailgun[:MAILGUN_SMTP_PASSWORD],
+    domain: mailgun[:MAILGUN_DOMAIN],
+    authentication: :plain
+  }
+  ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'sunday-stall.herokuapp.com', protocol: 'https' }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
